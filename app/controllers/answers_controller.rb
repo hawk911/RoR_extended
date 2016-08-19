@@ -1,14 +1,5 @@
-class AnswerController < ApplicationController
-  before_action :load_question, only: [:index, :show, :create]
-
-  def index
-    @answer =@question.answers
-  end
-
-  def show
-    @answer = @question.answers.find(params[:id])
-
-  end
+class AnswersController < ApplicationController
+  before_action :load_question, only: [:new, :create]
 
   def new
     @answer = Answer.new
@@ -17,9 +8,9 @@ class AnswerController < ApplicationController
   def create
     @answer = @question.answers.new(answer_params)
     if @answer.save
-      redirect_to @answer
+      redirect_to @question
     else
-      redner :new
+      render :new
     end
   end
 
@@ -32,5 +23,4 @@ class AnswerController < ApplicationController
   def answer_params
     params.require(:answer).permit(:body)
   end
-
 end
