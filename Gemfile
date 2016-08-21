@@ -38,9 +38,10 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
-#shoulda-matchers
+#shoulda-matchers, capybara
 group :test do
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 #controller testing
