@@ -13,7 +13,7 @@ feature 'Create Question', %q{
     fill_in 'Password', with: '12345678'
     click_on 'Log in'
 
-    visit question_path
+    visit questions_path
     click_on 'Ask question'
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'Body question'
@@ -23,7 +23,7 @@ feature 'Create Question', %q{
   end
 
   scenario 'Non-authenticated user create question' do
-    visit question_path
+    visit questions_path
     click_on 'Ask question'
 
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
