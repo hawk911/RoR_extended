@@ -8,6 +8,8 @@ table
   tbody
     - @questions.each do |question|
       tr
-        td =question.title
-        td =link_to 'Show', question
+        td= link_to (question) do
+          h4= question.title
+        end
+
 

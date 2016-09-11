@@ -19,7 +19,7 @@ feature 'Show list question', %q{
     questions.each do |question|
       expect(page).to have_link(question.title)
     end
-    save_and_open_page
+
 
   end
 end
