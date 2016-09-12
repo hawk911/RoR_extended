@@ -8,7 +8,7 @@ feature 'Show Questions', %q{
 
   let!(:questions) {create_list(:question,2)}
 
-  scenario "the user or guest see questions all" do
+  scenario "the guest see questions all" do
     visit(questions_path)
 
     questions.each do |question|

@@ -6,12 +6,10 @@ feature 'User sing in', %q{
   I want to be able to sing in
 } do
 
+  given(:user) {create (:user)}
   scenario 'Registered user try to sing in' do
-    User.create!(email: 'b@test.com', password: '12345678')
-    visit new_user_session_path
-    fill_in 'Email', with: 'b@test.com'
-    fill_in 'Password', with: '12345678'
-    click_on 'Log in'
+
+    sign_in(user)
 
     expect(page).to have_content 'Signed in successfully.'
     expect(current_path).to eq root_path

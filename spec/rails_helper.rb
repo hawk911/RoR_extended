@@ -34,6 +34,8 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   #controller_macros
   config.extend ControllerMacros, type: :controller
+  #feature_macros
+  config.include FeatureMacros, type: :feature
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
