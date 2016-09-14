@@ -1,2 +1,10 @@
-= @question.title
-= @question.body
+p
+  = render @question
+.answers
+  = render @question.answers
+
+- if user_signed_in? && current_user.author_of?(@question)
+  p
+    = link_to 'Delete', question_path(@question), method: :delete
+  p
+= render partial: 'answers/form', q: @question
