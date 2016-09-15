@@ -1,1 +1,7 @@
 ru:
+  questions:
+    form:
+      submit: 'Создать вопрос'
+  answers:
+    form:
+      submit: 'Создать ответ'
