@@ -1,6 +1,6 @@
 = form_for [@question, @answer] do |f|
   =render 'common/errors', resourse: @answer
 
-  = f.label :body, 'Answer'
+  = f.label :body
   = f.text_area :body
-  = f.submit 'Post You Answer'
+  = f.submit

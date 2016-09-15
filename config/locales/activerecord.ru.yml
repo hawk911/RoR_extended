@@ -1,0 +1,17 @@
+ru:
+  activerecord:
+    models:
+      answer: 'Ответ'
+      question: 'Вопрос'
+    attributes:
+      answer:
+        body: 'Вопрос'
+      question:
+        title: 'Наименование'
+        body: 'Вопрос'
+  errors:
+    models:
+      answer:
+        attributes:
+          user: 'Пользователь'
+          body: 'Вопрос'
