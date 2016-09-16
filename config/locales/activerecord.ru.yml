@@ -15,3 +15,6 @@ ru:
         attributes:
           user: 'Пользователь'
           body: 'Вопрос'
+  flash:
+    success:
+      new_question: 'Вы создали вопрос'

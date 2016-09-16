@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_question, only: [:new, :create]
 
   def new
@@ -13,6 +14,11 @@ class AnswersController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @answer.destroy
+    redirect_to @question, notice: 'Your answer successfully deleted'
+end
 
   private
 

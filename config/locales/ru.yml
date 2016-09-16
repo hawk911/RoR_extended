@@ -2,6 +2,16 @@ ru:
   questions:
     form:
       submit: 'Создать вопрос'
+    index:
+      ask: 'Задать вопрос'
   answers:
     form:
       submit: 'Создать ответ'
+  layouts:
+    application:
+      hello: 'Добро пожаловать'
+      signOut: 'Выход'
+      signIn: 'Войти'
+      registration: 'Регистрация'
+
+

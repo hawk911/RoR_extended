@@ -76,6 +76,12 @@ RSpec.describe QuestionsController, type: :controller do
         post :create, params: {question:attributes_for(:question)}
         expect(response).to redirect_to question_path(assigns(:question))
       end
+
+      it 'redirects to show view and set flash success' do
+        post :create, params: { question: attributes_for(:question) }
+        expect(response).to redirect_to assigns(:question)
+        should set_flash[:notice].to t('flash.success.new_question')
+      end
     end
 
     context 'with invalidate attributes' do
