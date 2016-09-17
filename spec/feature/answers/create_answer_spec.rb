@@ -17,11 +17,19 @@ feature 'Create Answer', %q{
 
 
     scenario 'user create valid answer' do
-      save_and_open_page
-      fill_in 'Answer', with: 'Text answer'
-      click_on 'Post You Answer'
 
-      expect(page).to have_content 'Text answer'
+      fill_in I18n.t('activerecord.attributes.answer.body'), with: 'text answer'
+      click_on I18n.t('answers.form.submit')
+      save_and_open_page
+      expect(page).to have_content('text answer')
+
+    end
+
+    scenario 'user create invalid answer' do
+      fill_in I18n.t('activerecord.attributes.answer.body'), with: ""
+      click_on I18n.t('answers.form.submit')
+
+      expect(page).to have_content I18n.t('activerecord.errors.messages.blank')
 
     end
   end

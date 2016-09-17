@@ -18,8 +18,8 @@ feature 'User sing in', %q{
   scenario 'Non-registered user try to sing in' do
     visit new_user_session_path
     fill_in 'Email', with: 'error@test.com'
-    fill_in 'Password', with: '12345678'
-    click_on 'Log in'
+    fill_in I18n.t('activerecord.user.password'), with: '12345678'
+    click_on I18n.t('devise.shared.links.login')
 
     expect(page).to have_content 'Log in Email Password Remember me Sign up Forgot your password?'
     expect(current_path).to eq new_user_session_path

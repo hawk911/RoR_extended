@@ -9,9 +9,9 @@ html lang="ru"
   body
     - if current_user.present?
       = link_to t('.signOut'), destroy_user_session_path, method: :delete
-    - else
-      = link_to t('.signIn'), new_user_session_path
-      = link_to t('.registration'), new_user_registration_path
+    //- else
+      //= link_to t('.signIn'), new_user_session_path
+      //= link_to t('.registration'), new_user_registration_path
 
     = flash[:notice] if flash[:notice]
     = flash[:alert] if flash[:alert]

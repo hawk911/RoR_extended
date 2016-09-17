@@ -3,18 +3,25 @@ ru:
     models:
       answer: 'Ответ'
       question: 'Вопрос'
+      user: 'Пользователь'
     attributes:
       answer:
         body: 'Вопрос'
       question:
         title: 'Наименование'
         body: 'Вопрос'
+      user:
+        password: 'Пароль'
   errors:
     models:
       answer:
         attributes:
           user: 'Пользователь'
           body: 'Вопрос'
+    messages:
+      blank: "не может быть пустым"
+      invalid: "не правильный"
+      empty: "не может быть пустым/не существует"
   flash:
     success:
       new_question: 'Вы создали вопрос'
