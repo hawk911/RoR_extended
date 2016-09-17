@@ -80,7 +80,7 @@ RSpec.describe QuestionsController, type: :controller do
       it 'redirects to show view and set flash success' do
         post :create, params: { question: attributes_for(:question) }
         expect(response).to redirect_to assigns(:question)
-        should set_flash[:notice].to t('flash.success.new_question')
+        should set_flash[:notice].to I18n.t('flash.success.new_question')
       end
     end
 
