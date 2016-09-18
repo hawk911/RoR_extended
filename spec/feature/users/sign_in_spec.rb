@@ -21,10 +21,11 @@ feature 'User sing in', %q{
     visit new_user_session_path
     fill_in 'Email', with: 'error@test.com'
     fill_in I18n.t('activerecord.attributes.user.password'), with: '12345678'
-    click_on I18n.t('devise.shared.links.login')
-    save_and_open_page
+    within ".actions" do
+      click_on I18n.t('devise.shared.links.login')
+    end
     within "body" do
-      expect(page).to have_content I18n.t('devise.failure.invalid')
+      expect(page).to have_content I18n.t('devise.failure.invalid', authentication_keys: "Email")
     end
     expect(current_path).to eq new_user_session_path
   end

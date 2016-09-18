@@ -12,6 +12,6 @@ ru:
       hello: 'Добро пожаловать'
       signOut: 'Выход'
       signIn: 'Войти'
-      registration: 'Регистрация'
+      signUp: 'Регистрация'
 
 
