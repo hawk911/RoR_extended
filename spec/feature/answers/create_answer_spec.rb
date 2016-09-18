@@ -6,8 +6,8 @@ feature 'Create Answer', %q{
   I want to be able to create answers
 } do
 
-  given!(:question) { create(:question) }
-  given!(:user) { create(:user) }
+  given(:question) { create(:question) }
+  given(:user) { create(:user) }
 
   context 'authenticated user' do
     before do
@@ -15,22 +15,33 @@ feature 'Create Answer', %q{
       visit question_path(question)
     end
 
-
     scenario 'user create valid answer' do
-
       fill_in I18n.t('activerecord.attributes.answer.body'), with: 'text answer'
       click_on I18n.t('answers.form.submit')
-      save_and_open_page
-      expect(page).to have_content('text answer')
+      within ".answers" do
+        expect(page).to have_content('text answer')
+      end
 
     end
 
     scenario 'user create invalid answer' do
       fill_in I18n.t('activerecord.attributes.answer.body'), with: ""
       click_on I18n.t('answers.form.submit')
+      within ".answer_errors" do
+        expect(page).to have_content (I18n.t('activerecord.attributes.answer.body') +
+                                      ' ' + I18n.t('errors.messages.blank'))
+      end
+    end
+  end
 
-      expect(page).to have_content I18n.t('activerecord.errors.messages.blank')
-
+  context 'non-authenticated user' do
+    scenario 'non-authenticated user create question' do
+      visit question_path(question)
+      fill_in I18n.t('activerecord.attributes.answer.body'), with: 'text answer'
+      click_on I18n.t('answers.form.submit')
+      within("body") do
+        expect(page).to have_content I18n.t('devise.failure.unauthenticated')
+      end
     end
   end
 
