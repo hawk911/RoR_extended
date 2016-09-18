@@ -7,9 +7,11 @@ ru:
     attributes:
       answer:
         body: 'Ответ'
+        delete: 'Удалить ответ'
       question:
         title: 'Наименование'
         body: 'Вопрос'
+        delete: 'Удалить вопрос'
       user:
         password: 'Пароль'
         password_confirmation: 'Подтвердите пароль'
