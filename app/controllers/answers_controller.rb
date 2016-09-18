@@ -10,6 +10,7 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
     if @answer.save
+      flash[:notice] = t('flash.success.new_answer')
       redirect_to @question
     else
       render :new

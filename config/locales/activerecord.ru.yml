@@ -6,7 +6,7 @@ ru:
       user: 'Пользователь'
     attributes:
       answer:
-        body: 'Вопрос'
+        body: 'Ответ'
       question:
         title: 'Наименование'
         body: 'Вопрос'
@@ -25,3 +25,4 @@ ru:
   flash:
     success:
       new_question: 'Вы создали вопрос'
+      new_answer: 'Вы создали ответ'

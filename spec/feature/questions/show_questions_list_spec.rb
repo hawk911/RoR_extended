@@ -1,25 +1,31 @@
 require "rails_helper"
 
 feature 'Show list question', %q{
-  Guest or User see questions
+  I want to see the questions
+  As the registered user and
+  As the non-registered user (guest)
+  I want to be able to ask question
 } do
 
-  let!(:questions) {create_list(:question,3)}
+  given(:user) { create(:user) }
+  given!(:questions) {create_list(:question,3)}
 
-  scenario 'Authenticated user show questions list' do
-    User.create!(email: 'b@test.com', password: '12345678')
-    visit new_user_session_path
-    fill_in 'Email', with: 'b@test.com'
-    fill_in 'Password', with: '12345678'
-    click_on 'Log in'
-    expect(page).to have_content 'Signed in successfully.'
+  context 'Authenticated user' do
 
-    visit questions_path
-
-    questions.each do |question|
-      expect(page).to have_link(question.title)
+    before do
+      sign_in(user)
+      visit questions_path
     end
 
+    scenario 'User show questions list' do
+      expect(page).to have_css('.questions div', count: 3)
+    end
+  end
 
+  context 'Non-Authenticated user' do
+    scenario 'Guest show questions list' do
+      visit questions_path
+      expect(page).to have_css('.questions div', count: 3)
+    end
   end
 end
