@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_question, only: [:new, :create, :destroy]
+  before_action :load_question, only: [:new, :create]
   before_action :load_answer, only: [:destroy]
   before_action :check_owner, only: [:destroy]
 
@@ -21,7 +21,7 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer.destroy
-    redirect_to @question, notice: 'Your answer successfully deleted'
+    redirect_to @answer.question, notice: t('flash.success.delete_answer')
   end
 
   private
