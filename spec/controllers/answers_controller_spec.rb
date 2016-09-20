@@ -76,11 +76,11 @@ RSpec.describe AnswersController, type: :controller do
         end
       end
 
-      context 'not users answer' do
+      context 'the user can not delete' do
 
         before { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
 
-        it 'user can not delete not your answer' do
+        it 'the user can not delete not the answer' do
           expect { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
           .not_to change(Answer, :count)
         end
@@ -90,12 +90,12 @@ RSpec.describe AnswersController, type: :controller do
         end
 
         it 'flash error delete answer' do
-        	should set_flash[:notice].to(I18n.t('flash.danger.auth_error'))
+          should set_flash[:notice].to(I18n.t('flash.danger.auth_error'))
         end
       end
     end
 
-    context 'not authenticated user' do
+    context 'no-authenticated user' do
 
       before { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
 
@@ -105,7 +105,7 @@ RSpec.describe AnswersController, type: :controller do
       end
 
       it 'redirect to new user session ' do
-          should redirect_to(new_user_session_path)
+        should redirect_to(new_user_session_path)
       end
 
     end
