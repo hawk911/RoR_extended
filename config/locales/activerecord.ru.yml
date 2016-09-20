@@ -31,3 +31,5 @@ ru:
       new_question: 'Вы создали вопрос'
       new_answer: 'Вы создали ответ'
       delete_answer: 'Вы удалили свой ответ'
+    danger:
+      auth_error: 'Ошибка аудентификации'

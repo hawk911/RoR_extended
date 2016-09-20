@@ -40,7 +40,7 @@ class AnswersController < ApplicationController
 
   def check_owner
     unless current_user.author_of?(@answer)
-      render 'common/error', locals: { message: 'Cannot delete the answer' }, status: :forbidden
+      redirect_to @answer.question, notice: t('flash.danger.auth_error')
     end
   end
 end
