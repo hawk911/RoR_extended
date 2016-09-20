@@ -7,7 +7,7 @@ ru:
     attributes:
       answer:
         body: 'Ответ'
-        delete: 'Удалить ответ'
+        delete: 'Удалить'
       question:
         title: 'Наименование'
         body: 'Вопрос'
