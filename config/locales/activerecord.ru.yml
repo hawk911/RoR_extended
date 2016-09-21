@@ -11,7 +11,7 @@ ru:
       question:
         title: 'Наименование'
         body: 'Вопрос'
-        delete: 'Удалить вопрос'
+        delete: 'Удалить'
       user:
         password: 'Пароль'
         password_confirmation: 'Подтвердите пароль'
