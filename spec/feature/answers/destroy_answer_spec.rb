@@ -27,9 +27,9 @@ feature 'Destroy answer', %q{
       I18n.t('activerecord.attributes.answer.delete'), href: "/answers/#{user.answers.last.id}")
 
       expect(page).not_to have_link(I18n.t('activerecord.attributes.answer.delete'), href: foreign_answer_path)
-
-      click_on I18n.t('activerecord.attributes.answer.delete')
-
+      within ".answers" do
+        click_on I18n.t('activerecord.attributes.answer.delete')
+      end
       expect(page).to have_current_path(question_path)
 
       within ".answers" do
