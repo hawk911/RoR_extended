@@ -1,10 +1,10 @@
-require "rails_helper"
+require 'rails_helper'
 
-feature 'Create Question', %q{
+feature 'Create Question', '
   In order to get question from community
   As an authenticated user
   I want to be able to ask question
-} do
+' do
 
   given(:user) { create(:user) }
 
@@ -19,14 +19,14 @@ feature 'Create Question', %q{
     end
 
     scenario 'user create question' do
-      within ".question" do
+      within '.question' do
         expect(page).to have_content 'Test question'
         expect(page).to have_content 'Body question'
       end
     end
 
     scenario 'flash user create question' do
-      within "body" do
+      within 'body' do
         expect(page).to have_content I18n.t('flash.success.new_question')
       end
     end
@@ -43,7 +43,7 @@ feature 'Create Question', %q{
       fill_in I18n.t('activerecord.attributes.question.title'), with: ''
       fill_in I18n.t('activerecord.attributes.question.body'), with: 'Body question'
       click_on I18n.t('questions.form.submit')
-      within ".question_errors" do
+      within '.question_errors' do
         expect(page).to have_content (I18n.t('activerecord.attributes.question.title') +
                                       ' ' + I18n.t('errors.messages.blank'))
       end
@@ -54,11 +54,9 @@ feature 'Create Question', %q{
     scenario 'Non-authenticated user create question' do
       visit questions_path
       click_on I18n.t('questions.index.ask')
-      within "body" do
+      within 'body' do
         expect(page).to have_content I18n.t('devise.failure.unauthenticated')
       end
     end
   end
-
-
 end

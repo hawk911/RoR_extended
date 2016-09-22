@@ -1,17 +1,16 @@
-require "rails_helper"
+require 'rails_helper'
 
-feature 'Show list question', %q{
+feature 'Show list question', '
   I want to see the questions
   As the registered user and
   As the non-registered user (guest)
   I want to be able to ask question
-} do
+' do
 
   given(:user) { create(:user) }
-  given!(:questions) {create_list(:question,3)}
+  given!(:questions) { create_list(:question, 3) }
 
   context 'Authenticated user' do
-
     before do
       sign_in(user)
       visit questions_path

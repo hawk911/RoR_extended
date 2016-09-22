@@ -3,7 +3,7 @@ module FeatureMacros
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in I18n.t('activerecord.attributes.user.password'), with: '12345678'
-    within ".actions" do
+    within '.actions' do
       click_on I18n.t('devise.shared.links.login')
     end
   end

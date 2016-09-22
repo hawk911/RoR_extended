@@ -1,17 +1,16 @@
-require "rails_helper"
+require 'rails_helper'
 
-feature 'User sing in', %q{
+feature 'User sing in', '
   In order to be able to ask question
   as an User
   I want to be able to sing in
-} do
+' do
 
-  given(:user) {create (:user)}
+  given(:user) { create :user }
 
   scenario 'Registered user try to sing in' do
-
     sign_in(user)
-    within "body" do
+    within 'body' do
       expect(page).to have_content I18n.t('devise.sessions.signed_in')
     end
     expect(current_path).to eq root_path
@@ -21,14 +20,12 @@ feature 'User sing in', %q{
     visit new_user_session_path
     fill_in 'Email', with: 'error@test.com'
     fill_in I18n.t('activerecord.attributes.user.password'), with: '12345678'
-    within ".actions" do
+    within '.actions' do
       click_on I18n.t('devise.shared.links.login')
     end
-    within "body" do
-      expect(page).to have_content I18n.t('devise.failure.invalid', authentication_keys: "Email")
+    within 'body' do
+      expect(page).to have_content I18n.t('devise.failure.invalid', authentication_keys: 'Email')
     end
     expect(current_path).to eq new_user_session_path
   end
-
-
 end

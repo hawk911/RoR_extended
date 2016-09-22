@@ -12,10 +12,10 @@ module RoRExtended
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    #i18n default ru
+    # i18n default ru
     config.i18n.default_locale = :ru
 
-    #Settings generate
+    # Settings generate
     config.generators do |g|
       g.test_framework :rspec,
                        fixtures: true,

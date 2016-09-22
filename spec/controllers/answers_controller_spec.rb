@@ -1,15 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
-
-  let(:question) { create(:question)  }
+  let(:question) { create(:question) }
   let(:answer) { create(:answer, question: question) }
   let(:user) { create :user }
 
-
   describe 'GET #new' do
     sign_in_user
-    before {get :new, params: { question_id: question } }
+    before { get :new, params: { question_id: question } }
 
     it 'assigns a new answer to @answer' do
       expect(assigns(:answer)).to be_a_new(Answer)
@@ -25,23 +23,22 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with validate attributes' do
       it 'saves the new answer in the base' do
-        expect { post :create, params: {question_id: question, answer: attributes_for(:answer)} }.to change(question.answers, :count).by(1)
+        expect { post :create, params: { question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
       end
 
       it 'redirects to show view' do
-        post :create, params: {question_id: question, answer: attributes_for(:answer)}
+        post :create, params: { question_id: question, answer: attributes_for(:answer) }
         expect(response).to redirect_to assigns(:question)
       end
     end
 
     context 'create with invalid attributes' do
-
       it 'does not save a new answer into the database' do
-        expect { post :create, params: {question_id: question, answer: attributes_for(:invalid_answer)}  }.to_not change(Answer, :count)
+        expect { post :create, params: { question_id: question, answer: attributes_for(:invalid_answer) } }.to_not change(Answer, :count)
       end
 
       it 're-renders new view' do
-        post :create, params: {question_id: question, answer: attributes_for(:invalid_answer)}
+        post :create, params: { question_id: question, answer: attributes_for(:invalid_answer) }
         expect(response).to render_template :new
       end
     end
@@ -63,8 +60,8 @@ RSpec.describe AnswersController, type: :controller do
         before { delete :destroy, params: { id: user_answer1, question_id: question_with_answers } }
 
         it 'user destroy your answer' do
-          expect {delete :destroy, params: { id: user_answer2, question_id: question_with_answers }}
-          .to change(Answer, :count).by(-1)
+          expect { delete :destroy, params: { id: user_answer2, question_id: question_with_answers } }
+            .to change(Answer, :count).by(-1)
         end
 
         it 'redirect to question page' do
@@ -77,12 +74,11 @@ RSpec.describe AnswersController, type: :controller do
       end
 
       context 'the user can not delete' do
-
         before { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
 
         it 'the user can not delete not the answer' do
           expect { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
-          .not_to change(Answer, :count)
+            .not_to change(Answer, :count)
         end
 
         it 'redirect to question page' do
@@ -96,18 +92,16 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context 'no-authenticated user' do
-
       before { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
 
       it 'no-authenticated user can not delete question' do
         expect { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
-        .not_to change(Answer, :count)
+          .not_to change(Answer, :count)
       end
 
       it 'redirect to new user session ' do
         should redirect_to(new_user_session_path)
       end
-
     end
   end
 end
