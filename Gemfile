@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
 # Use postgresql as the database for Active Record
@@ -27,14 +26,14 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-#devise
+# devise
 gem 'devise'
-#slim
+# slim
 gem 'slim-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-#test
+# test
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -42,7 +41,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
 end
 
-#shoulda-matchers, capybara, controller testing
+# shoulda-matchers, capybara, controller testing
 group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
