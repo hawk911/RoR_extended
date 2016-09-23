@@ -8,7 +8,7 @@ feature 'Show list question', '
 ' do
 
   given(:user) { create(:user) }
-  given!(:questions) { create_list(:question, 3) }
+  given!(:questions) { create_list(:question, 2) }
 
   context 'Authenticated user' do
     before do
@@ -17,14 +17,18 @@ feature 'Show list question', '
     end
 
     scenario 'User show questions list' do
-      expect(page).to have_css('.questions div', count: 3)
+      questions.each do |question|
+        expect(page).to have_link(question.title)
+      end
     end
   end
 
   context 'Non-Authenticated user' do
     scenario 'Guest show questions list' do
       visit questions_path
-      expect(page).to have_css('.questions div', count: 3)
+      questions.each do |question|
+        expect(page).to have_link(question.title)
+      end
     end
   end
 end

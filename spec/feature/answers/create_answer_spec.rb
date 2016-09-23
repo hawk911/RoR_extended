@@ -17,17 +17,16 @@ feature 'Create Answer', '
       click_on I18n.t('answers.form.submit')
     end
 
-    scenario 'user create valid answer' do
+    scenario 'user create valid answer', :aggragate_failures do
       within '.answers' do
         expect(page).to have_content('text answer')
       end
-    end
 
-    scenario 'flash create valid answer' do
       within 'body' do
         expect(page).to have_content I18n.t('flash.success.new_answer')
       end
     end
+
   end
 
   context 'Authenticated user invalid answer' do
