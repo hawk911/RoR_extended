@@ -6,7 +6,7 @@ feature 'Destroy question', '
 ' do
   given(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
-  given(:user_question_path) { "/questions/#{question.id}" }
+  given(:user_question_path) { questions_path(question) }
   given!(:other_question) { create(:question) }
 
   context 'Authenticated user' do

@@ -30,6 +30,10 @@ RSpec.describe AnswersController, type: :controller do
         post :create, params: { question_id: question, answer: attributes_for(:answer) }
         expect(response).to redirect_to assigns(:question)
       end
+
+      it 'user owned answer' do
+        expect { post :create, params: { answer: attributes_for(:answer), question_id: question.id } }.to change(@user.answers, :count).by(1)
+      end
     end
 
     context 'create with invalid attributes' do

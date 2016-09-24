@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner, only: [:destroy]
 
   def index
     @questions = Question.all
@@ -49,5 +50,11 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :body)
+  end
+
+  def check_owner
+    unless current_user.author_of?(@question)
+      redirect_to @question, notice: t('flash.danger.auth_error')
+    end
   end
 end
