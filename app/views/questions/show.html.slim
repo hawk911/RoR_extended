@@ -1,0 +1,12 @@
+p
+.question
+  = render @question
+  - if user_signed_in? && current_user.author_of?(@question)
+  p
+    = link_to I18n.t('activerecord.attributes.question.delete'), question_path(@question), method: :delete
+  p
+.answers
+  = render @question.answers
+
+
+= render partial: 'answers/form', q: @question

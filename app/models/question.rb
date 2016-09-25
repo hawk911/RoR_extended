@@ -1,4 +1,9 @@
 class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
-  validates :title, :body, presence: true
+  belongs_to :user
+
+  validates :title, :body, :user_id, presence: true
+
+  scope :ordered, -> { order(created_at: :desc) }
+
 end

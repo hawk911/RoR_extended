@@ -16,4 +16,8 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Ignore database
 config/database.yml
+
+# Ignore rake
+.rake_tasks~

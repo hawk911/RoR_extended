@@ -1,0 +1,7 @@
+= form_for [@question, @answer] do |f|
+  =render 'common/errors', resourse: @answer
+  p
+  = f.label :body
+  = f.text_area :body
+  p
+  = f.submit t('.submit')
