@@ -1,12 +1,8 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_question, only: [:new, :create]
+  before_action :load_question, only: [:create]
   before_action :load_answer, only: [:destroy]
   before_action :check_owner, only: [:destroy]
-
-  def new
-    @answer = Answer.new
-  end
 
   def create
     @answer = @question.answers.new(answer_params)

@@ -5,19 +5,6 @@ RSpec.describe AnswersController, type: :controller do
   let(:answer) { create(:answer, question: question) }
   let(:user) { create :user }
 
-  describe 'GET #new' do
-    sign_in_user
-    before { get :new, params: { question_id: question } }
-
-    it 'assigns a new answer to @answer' do
-      expect(assigns(:answer)).to be_a_new(Answer)
-    end
-
-    it 'renders new view' do
-      expect(response).to render_template :new
-    end
-  end
-
   describe 'POST #create' do
     sign_in_user
 
@@ -65,7 +52,7 @@ RSpec.describe AnswersController, type: :controller do
 
         it 'user destroy your answer' do
           expect { delete :destroy, params: { id: user_answer2, question_id: question_with_answers } }
-            .to change(Answer, :count).by(-1)
+          .to change(Answer, :count).by(-1)
         end
 
         it 'redirect to question page' do
@@ -82,7 +69,7 @@ RSpec.describe AnswersController, type: :controller do
 
         it 'the user can not delete not the answer' do
           expect { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
-            .not_to change(Answer, :count)
+          .not_to change(Answer, :count)
         end
 
         it 'redirect to question page' do
@@ -100,7 +87,7 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'no-authenticated user can not delete question' do
         expect { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
-          .not_to change(Answer, :count)
+        .not_to change(Answer, :count)
       end
 
       it 'redirect to new user session ' do

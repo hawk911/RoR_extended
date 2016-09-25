@@ -2,7 +2,7 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
   belongs_to :user
 
-  validates :title, :body, :user, :user_id, presence: true
+  validates :title, :body, :user_id, presence: true
 
   scope :ordered, -> { order(created_at: :desc) }
 
