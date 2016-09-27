@@ -17,7 +17,8 @@ feature 'Create Answer', '
       click_on I18n.t('answers.form.submit')
     end
 
-    scenario 'user create valid answer', :aggragate_failures do
+    scenario 'user create valid answer', :aggragate_failures, js: true do
+      save_and_open_page
       within '.answers' do
         expect(page).to have_content('text answer')
       end
@@ -35,7 +36,7 @@ feature 'Create Answer', '
       visit question_path(question)
     end
 
-    scenario 'user create invalid answer' do
+    scenario 'user create invalid answer', js: true do
       fill_in I18n.t('activerecord.attributes.answer.body'), with: ''
       click_on I18n.t('answers.form.submit')
       within '.answer_errors' do
@@ -46,7 +47,7 @@ feature 'Create Answer', '
   end
 
   context 'non-authenticated user' do
-    scenario 'non-authenticated user create answer' do
+    scenario 'non-authenticated user create answer', js: true do
       visit question_path(question)
       fill_in I18n.t('activerecord.attributes.answer.body'), with: 'text answer'
       click_on I18n.t('answers.form.submit')

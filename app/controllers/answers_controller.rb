@@ -5,13 +5,13 @@ class AnswersController < ApplicationController
   before_action :check_owner, only: [:destroy]
 
   def create
-    @answer = @question.answers.new(answer_params)
+    @answer = @question.answers.create(answer_params)
     @answer.user = current_user
     if @answer.save
       flash[:notice] = t('flash.success.new_answer')
-      redirect_to @question
-    else
-      render :new
+      #redirect_to @question
+      #else
+      # render :new
     end
   end
 

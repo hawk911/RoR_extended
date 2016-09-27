@@ -1,0 +1,6 @@
+<% if @answer.errors.present? %>
+  $('.errors').append("<%= j render 'common/errors', object: @answer %>");
+<% else %>
+  $('.answers').append("<%= j 'answer', answer: @answer %>");
+  $('#answer_body').val('');
+<% end %>

@@ -1,3 +1,4 @@
+.errors
 p
 .question
   = render @question
@@ -7,6 +8,5 @@ p
   p
 .answers
   = render @question.answers
-
 
 = render partial: 'answers/form', q: @question
