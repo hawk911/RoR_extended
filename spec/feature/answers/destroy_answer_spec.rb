@@ -6,8 +6,8 @@ feature 'Destroy answer', '
 ' do
 
   given(:user) { create(:user) }
-  given(:question) { create(:question_with_answers) }
-  given(:foreign_answer) { question.answers.first }
+  given!(:question) { create(:question_with_answers) }
+  given!(:foreign_answer) { question.answers.first }
   context 'valid user destroy answer' do
     before do
       sign_in(user)
@@ -20,24 +20,25 @@ feature 'Destroy answer', '
 
       wait_for_ajax
 
-      #within '.answers' do
       expect(page).to have_content('User text answer')
-      #end
+      within '.answers' do
+        click_on I18n.t('activerecord.attributes.answer.delete')
+      end
 
-      expect(page).to have_link(
-      I18n.t('activerecord.attributes.answer.delete'), href: answer_path(foreign_answer))
-
-
-      expect(page).not_to have_link(I18n.t('activerecord.attributes.answer.delete'), href: foreign_answer_path)
-      #within '.answers' do
-      click_on I18n.t('activerecord.attributes.answer.delete')
-      #end
       expect(page).to have_current_path(question_path(question))
+      within '.answers' do
+        expect(page).not_to have_content('User answer')
+        expect(page).not_to have_link(I18n.t('activerecord.attributes.answer.delete'))
+      end
+    end
+  end
 
-      #within '.answers' do
-      expect(page).not_to have_content('User answer')
-      expect(page).not_to have_link(I18n.t('activerecord.attributes.answer.delete'))
-      #end
+  context 'non-Authenticated user destroy answer' do
+    scenario 'destroy answer' do
+      visit question_path(question)
+      within '.answers' do
+        expect(page).not_to have_link(I18n.t('activerecord.attributes.answer.delete'))
+      end
     end
   end
 end
