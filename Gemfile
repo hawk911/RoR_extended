@@ -39,14 +39,14 @@ group :development, :test do
   gem 'factory_girl_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'selenium-webdriver'
+  gem 'capybara'
+  gem 'capybara-webkit'
   gem 'database_cleaner'
 end
 
 # shoulda-matchers, capybara, controller testing
 group :test do
   gem 'shoulda-matchers'
-  gem 'capybara'
   gem 'launchy'
   gem 'rails-controller-testing'
 end
