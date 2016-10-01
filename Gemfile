@@ -41,7 +41,8 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'selenium-webdriver'
   gem 'database_cleaner'
-end
+  gem 'pry-rails'
+ end
 
 # shoulda-matchers, capybara, controller testing
 group :test do
