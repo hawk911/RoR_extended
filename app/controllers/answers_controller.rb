@@ -1,13 +1,17 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
-  before_action :load_answer, only: [:destroy]
+  before_action :load_answer, only: [:destroy, :update]
   before_action :check_owner, only: [:destroy]
 
   def create
     @answer = @question.answers.create(answer_params)
     @answer.user = current_user
     flash[:notice] = t('flash.success.new_answer') if @answer.save
+  end
+
+  def update
+    @answer.update(answer_params)
   end
 
   def destroy

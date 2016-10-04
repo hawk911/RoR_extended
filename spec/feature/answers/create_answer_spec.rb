@@ -22,7 +22,6 @@ feature 'Create Answer', '
 
       expect(page).to have_content('text answer')
       expect(page).to have_current_path(question_path(question))
-      #expect(page).to have_content I18n.t('flash.success.new_answer')
 
     end
 
@@ -53,7 +52,6 @@ feature 'Create Answer', '
 
       wait_for_ajax
 
-      #expect(page).to have_content I18n.t('devise.failure.unauthenticated')
       expect(page).not_to  have_content('text answer')
     end
   end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
-  let(:question) { create(:question) }
+  let!(:question) { create(:question) }
   let(:answer) { create(:answer, question: question) }
   let(:user) { create :user }
 
@@ -13,9 +13,9 @@ RSpec.describe AnswersController, type: :controller do
         expect { post :create, params: { question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
       end
 
-      it 'redirects to show view' do
-        post :create, params: { question_id: question, answer: attributes_for(:answer) }
-        expect(response).to redirect_to assigns(:question)
+      it 'render update template' do
+        post :create, params: { question_id: question, answer: attributes_for(:answer) }, format: :js
+        expect(response).to render_template :create
       end
 
       it 'user owned answer' do
@@ -87,6 +87,27 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'redirect to new user session ' do
         should redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+  describe 'PATCH #update' do
+    before { sign_in user }
+    context 'valid attributes' do
+      it 'assigns the requested answer to @answer' do
+        patch :update, params: { id: answer, question_id: question, answer: attributes_for(:answer) }, format: :js
+        expect(assigns(:answer)).to eq answer
+      end
+
+      it 'change answer attributes' do
+        patch :update, params: { id: answer, question_id: question, answer: { body: 'new body' } }, format: :js
+        answer.reload
+        expect(answer.body).to eq 'new body'
+      end
+
+      it 'render update template' do
+        patch :update, params: { id: answer, question_id: question, answer: attributes_for(:answer) }, format: :js
+        expect(response).to render_template :update
       end
     end
   end
