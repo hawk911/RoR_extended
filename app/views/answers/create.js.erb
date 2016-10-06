@@ -1,3 +1,5 @@
+$(".errors").empty();
+$(".alert").remove();
 <% if @answer.errors.present? %>
   $('.errors').append('<%= j render "common/errors", resourse: @answer %>').appendTo(".errors");
 <% else %>
