@@ -1,12 +1,12 @@
-->
+ready = ->
  $('.edit-answer-link').click (e) ->
-   debbuger()
    e.preventDefault()
    $(this).hide()
    answer_id = $(this).data('answerId')
-   $('edit-answer-'+answer_id).show()
+   $('form#edit-answer-' + answer_id).show()
 
-
-
+$(document).ready(ready)
+$(document).on('page:load', ready)
+$(document).on('page:update', ready)
 
 

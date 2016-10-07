@@ -4,5 +4,5 @@ $(".alert").remove();
   $('.errors').append('<%= j render "common/errors", resourse: @answer %>').appendTo(".errors");
 <% else %>
   $('.answers').append('<%= j render "answer", answer: @answer %>');
-  $('#answer_body').val('');
+  $('textarea#answer_body').val('');
 <% end %>
