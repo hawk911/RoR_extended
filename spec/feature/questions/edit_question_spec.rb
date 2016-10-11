@@ -1,9 +1,9 @@
 require_relative '../feature_helper'
 
-feature 'User edit answer', %q{
-  In orderto fix mistake
-  As owner of answer
-  I want edit my answer
+feature 'User edit question', %q{
+  In order to fix mistake
+  As owner of question
+  I want edit my question
 } do
 
   given(:user) { create(:user) }
@@ -18,30 +18,28 @@ feature 'User edit answer', %q{
     end
 
     scenario 'show Edit ' do
-      within '.answers' do
+      within '.question' do
         expect(page).to have_content 'Edit'
       end
-
     end
 
     scenario 'edits with valid attributes', js:true do
-      within '.answers' do
+      within '.question' do
         click_on 'Edit'
-        fill_in 'Answer', with: "edit answer"
+        fill_in 'Question', with: 'edit question'
         click_on 'Save'
 
-        expect(page).to_not have_content answer.body
-        expect(page).to have_content 'edit answer'
+        expect(page).to_not have_content question.body
+        expect(page).to have_content 'edit question'
         expect(page).to_not have_selector 'textarea'
       end
-
     end
 
     scenario 'edits with invalid attributes', js:true do
-      within '.answers' do
+      within '.question' do
         click_on 'Edit'
         expect(page).not_to have_content 'Edit'
-        fill_in 'Answer', with: ''
+        fill_in 'Question', with: ''
         click_on 'Save'
 
         expect(page).to_not have_content 'Edit'
@@ -55,7 +53,7 @@ feature 'User edit answer', %q{
       sign_in other_user
       visit question_path question
 
-      within '.answers' do
+      within '.question' do
         expect(page).not_to have_selector('textarea')
         expect(page).not_to have_content('Edit')
       end

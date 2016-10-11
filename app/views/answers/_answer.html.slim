@@ -9,4 +9,4 @@
             = f.label :body, 'Answer'
             = f.text_area :body
             = f.submit 'Save'
-        = link_to I18n.t('activerecord.attributes.answer.delete'), answer, method: :delete
+        = link_to I18n.t('activerecord.attributes.answer.delete'), answer, method: :delete, remote:true

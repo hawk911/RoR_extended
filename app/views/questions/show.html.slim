@@ -3,6 +3,12 @@ p
 .question
   = render @question
   - if user_signed_in? && current_user.author_of?(@question)
+    = link_to 'Edit','', class: 'edit-question-link'
+      p
+        = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
+          = f.label :body, 'Question'
+          = f.text_area :body
+          = f.submit 'Save'
   p
     = link_to I18n.t('activerecord.attributes.question.delete'), question_path(@question), method: :delete
   p

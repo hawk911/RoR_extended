@@ -34,7 +34,7 @@ feature 'Destroy answer', '
   end
 
   context 'non-Authenticated user destroy answer' do
-    scenario 'destroy answer' do
+    scenario 'destroy answer', js:true do
       visit question_path(question)
       within '.answers' do
         expect(page).not_to have_link(I18n.t('activerecord.attributes.answer.delete'))
