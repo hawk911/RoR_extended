@@ -6,7 +6,9 @@ ru:
       ask: 'Задать вопрос'
   answers:
     form:
+      edit: 'Редактировать'
       submit: 'Создать ответ'
+      edit_save: 'Изменить ответ'
   layouts:
     application:
       hello: 'Добро пожаловать'

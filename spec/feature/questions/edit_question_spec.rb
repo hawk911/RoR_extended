@@ -8,7 +8,7 @@ feature 'User edit question', %q{
 
   given(:user) { create(:user) }
   given!(:other_user) { create :user }
-  given!(:question) { create(:question) }
+  given!(:question) { create(:question, user: user) }
   given!(:answer) { create(:answer, question: question, user: user) }
 
   context 'Authenticated User' do
@@ -17,13 +17,13 @@ feature 'User edit question', %q{
       visit question_path(question)
     end
 
-    scenario 'show Edit ' do
+    scenario 'show Edit' do
       within '.question' do
         expect(page).to have_content 'Edit'
       end
     end
 
-    scenario 'edits with valid attributes', js:true do
+    scenario 'edits with valid attributes', js: true do
       within '.question' do
         click_on 'Edit'
         fill_in 'Question', with: 'edit question'
@@ -35,7 +35,7 @@ feature 'User edit question', %q{
       end
     end
 
-    scenario 'edits with invalid attributes', js:true do
+    scenario 'edits with invalid attributes', js: true do
       within '.question' do
         click_on 'Edit'
         expect(page).not_to have_content 'Edit'
@@ -59,7 +59,6 @@ feature 'User edit question', %q{
       end
     end
   end
-
 
   scenario 'Non-Authenticated User edit' do
     visit question_path(question)

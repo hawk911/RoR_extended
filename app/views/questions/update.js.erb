@@ -3,7 +3,8 @@ $(".alert").remove();
 <% if @question.errors.present? %>
   $('.errors').append('<%= j render "common/errors", resourse: @question %>').appendTo(".errors");
 <% else %>
-  $("#question_<%=@question.id %>").replaceWith("<%= j render @question %>");
+  console.log('Edit Question');
+  $("#question_<%=@question.id %>").replaceWith("<%= j render 'question', question: @question %>");
   $('form#edit-question-<%= @question.id %>').hide();
   $('.edit-question-link').show();
 <% end %>

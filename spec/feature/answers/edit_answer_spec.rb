@@ -19,16 +19,18 @@ feature 'User edit answer', %q{
 
     scenario 'show Edit ' do
       within '.answers' do
-        expect(page).to have_content 'Edit'
+        expect(page).to have_content I18n.t('answers.form.edit')
       end
 
     end
 
-    scenario 'edits with valid attributes', js:true do
+    scenario 'edits with valid attributes', js: true do
       within '.answers' do
-        click_on 'Edit'
-        fill_in 'Answer', with: "edit answer"
-        click_on 'Save'
+        click_on I18n.t('answers.form.edit')
+        fill_in I18n.t('activerecord.models.answer'), with: "edit answer"
+        click_on I18n.t('answers.form.edit_save')
+
+        wait_for_ajax
 
         expect(page).to_not have_content answer.body
         expect(page).to have_content 'edit answer'
@@ -37,27 +39,31 @@ feature 'User edit answer', %q{
 
     end
 
-    scenario 'edits with invalid attributes', js:true do
+    scenario 'edits with invalid attributes', js: true do
       within '.answers' do
-        click_on 'Edit'
-        expect(page).not_to have_content 'Edit'
-        fill_in 'Answer', with: ''
-        click_on 'Save'
+        click_on I18n.t('answers.form.edit')
+        expect(page).not_to have_content I18n.t('answers.form.edit')
+        fill_in I18n.t('activerecord.models.answer'), with: ''
+        click_on I18n.t('answers.form.edit_save')
 
-        expect(page).to_not have_content 'Edit'
+        wait_for_ajax
+
+        expect(page).to_not have_content I18n.t('answers.form.edit')
         expect(page).to have_selector('textarea')
       end
     end
   end
 
-  context 'not owner of the answer' do
+  context 'not owner of the answer', js: true do
     scenario "can't see edit link" do
       sign_in other_user
       visit question_path question
 
+      wait_for_ajax
+
       within '.answers' do
         expect(page).not_to have_selector('textarea')
-        expect(page).not_to have_content('Edit')
+        expect(page).not_to have_content(I18n.t('answers.form.edit'))
       end
     end
   end
@@ -66,6 +72,6 @@ feature 'User edit answer', %q{
   scenario 'Non-Authenticated User edit' do
     visit question_path(question)
 
-    expect(page).to_not have_link 'Edit'
+    expect(page).to_not have_link I18n.t('answers.form.edit')
   end
 end
