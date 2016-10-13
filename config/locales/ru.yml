@@ -2,6 +2,8 @@ ru:
   questions:
     form:
       submit: 'Создать вопрос'
+      edit: 'Редактировать'
+      edit_save: 'Изменить вопрос'
     index:
       ask: 'Задать вопрос'
   answers:
