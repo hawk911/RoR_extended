@@ -17,9 +17,9 @@ feature 'User edit answer', %q{
       visit question_path(question)
     end
 
-    scenario 'show Edit ' do
+    scenario 'show Edit', js: true do
       within '.answers' do
-        expect(page).to have_content I18n.t('answers.form.edit')
+        expect(page).to have_content I18n.t('questions.form.edit')
       end
 
     end
@@ -69,7 +69,7 @@ feature 'User edit answer', %q{
   end
 
 
-  scenario 'Non-Authenticated User edit' do
+  scenario 'Non-Authenticated User edit', js: true do
     visit question_path(question)
 
     expect(page).to_not have_link I18n.t('answers.form.edit')
