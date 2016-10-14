@@ -6,7 +6,9 @@ to select the best response
 ' do
 
   given(:user) { create(:user) }
-  given(:question) { create(:question_with_answers)}
+  given!(:question) { create(:question, user: user)}
+  given(:answer_first) { create(:answer, user: user, question: question)}
+  given(:answer_second) { create(:answer, user: user, question: question)}
 
   context 'Authenticated user' do
     before do
