@@ -19,6 +19,15 @@ class AnswersController < ApplicationController
     redirect_to @answer.question, notice: t('flash.success.delete_answer')
   end
 
+  def set_best
+    if current_user.author_of?(@question)
+      @question = @answer.question
+      @answer.toggle_best!
+    else
+      render 'common/error', locals: { message: 'Only owner of the question can make answer the best' }, status: :forbidden
+    end
+  end
+
   private
 
   def load_question

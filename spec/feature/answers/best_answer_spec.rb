@@ -7,8 +7,8 @@ to select the best response
 
   given(:user) { create(:user) }
   given!(:question) { create(:question, user: user)}
-  given(:answer_first) { create(:answer, user: user, question: question)}
-  given(:answer_second) { create(:answer, user: user, question: question)}
+  given!(:answer_first) { create(:answer, user: user, question: question)}
+  given!(:answer_second) { create(:answer, user: user, question: question)}
 
   context 'Authenticated user' do
     before do
@@ -28,32 +28,36 @@ to select the best response
     end
 
     scenario 'vote answer', js: true do
-      click_on 'Best answer'
+
+      within "#answer_#{answer_first.id}" do
+        click_on 'Best answer'
+      end
 
       wait_for_ajax
+
+      within "#answer_#{answer_first.id}" do
+        expect(page).to have_content('Revert')
+      end
 
       within '.answers' do
         expect(page).to have_content('Best answer')
         expect(page).to have_content('Revert')
       end
-
-      #expect(page).to eq(value)
     end
 
     scenario 'user vote against the aswer', js: true do
 
     end
-
   end
 
   context 'non-Authenticated user' do
     scenario 'not exists votes answer', js: true do
+      visit question_path(question)
 
-    end
+      wait_for_ajax
 
-    scenario 'user can not vote for answer', js: true do
-
+      expect(page).to_not have_content('Best answer')
+      expect(page).to_not have_content('Revert')
     end
   end
-
 end

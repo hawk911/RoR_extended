@@ -15,4 +15,24 @@ RSpec.describe Answer, type: :model do
     it { should have_db_index :question_id }
     it { should have_db_index :user_id }
   end
+
+  describe '#set_best method' do
+    let(:question_and_answer) { create(:question_with_answers) }
+    let(:answer_first) { question_and_answer.answers.first }
+    let(:answer_last) { question_and_answer.answers.last }
+    let!(:answer_best) { create(:answer, best: true) }
+
+    it 'answer toggled the best' do
+      expect { answer_first.toggle_best! }.to change { answer_first.best }.from(false).to(true)
+    end
+
+    it 'only one answer the best' do
+      answer_first.toggle_best!
+      expect(answer_last).to_not be_best
+    end
+
+    it 'answer toggled revers the best' do
+      expect { answer_best.toggle_best! }.to change { answer_best.best }.from(true).to(false)
+    end
+  end
 end

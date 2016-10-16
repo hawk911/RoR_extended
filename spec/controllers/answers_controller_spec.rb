@@ -4,6 +4,9 @@ RSpec.describe AnswersController, type: :controller do
   let!(:question) { create(:question) }
   let(:answer) { create(:answer, question: question) }
   let(:user) { create :user }
+  let(:other_user) { create :user }
+  let(:question_and_answer) { create(:question_with_answers, user: user) }
+
 
   describe 'POST #create' do
     sign_in_user
@@ -108,6 +111,45 @@ RSpec.describe AnswersController, type: :controller do
       it 'render update template' do
         patch :update, params: { id: answer, question_id: question, answer: attributes_for(:answer) }, format: :js
         expect(response).to render_template :update
+      end
+    end
+  end
+
+  describe 'PATCH #set_best' do
+  	subject(:set_best) { patch :set_best, params: { id: answer, question_id: question_and_answer, format: :js } }
+    describe 'owner of the question' do
+      before do
+        sign_in user
+        set_best
+      end
+
+      it 'assigns the best answer to @answer' do
+        expect(assigns(:answer)).to eq answer
+      end
+
+      it 'assigns question to @question' do
+        expect(assigns(:question)).to eq question_and_answer
+      end
+
+      it 'make answer the best' do
+        answer.reload
+        expect(answer).to be_best
+      end
+
+      it 'renders set_best template' do
+        expect(response).to render_template :set_best
+      end
+    end
+
+    describe 'not owner of the question' do
+      before do
+        sign_in other_user
+        set_best
+      end
+
+      it 'could not make answer the best' do
+        answer.reload
+        expect(answer).to_not be_best
       end
     end
   end

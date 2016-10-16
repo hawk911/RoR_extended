@@ -1,0 +1,5 @@
+<% if @answer.errors.present? %>
+  $('.errors').append("<%= j render 'common/errors', resourse: @answer %>");
+<% else %>
+  $('.answers').html('<%= j render @question.answers %>');
+<% end%>

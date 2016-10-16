@@ -10,4 +10,8 @@
             = f.text_area :body
             = f.submit I18n.t('answers.form.edit_save')
         = link_to (answer.best? ? 'Revert' : 'Best answer'),'',class: 'Best', remote: true
-        = link_to I18n.t('activerecord.attributes.answer.delete'), answer, method: :delete, remote:true
+        = link_to I18n.t('activerecord.attributes.answer.delete'), set_best_question_path(@question, answer), method: :patch, remote: true, class: 'warning button'
+
+
+
+
