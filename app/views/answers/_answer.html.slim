@@ -2,15 +2,17 @@
   div id="answer_#{answer.id}"
     = answer.body
     .links
-      - if user_signed_in? && current_user.author_of?(answer)
-        = link_to I18n.t('answers.form.edit'),'', class: 'edit-answer-link', data: { answer_id: answer.id }
-        p
-          = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
-            = f.label :body, I18n.t('activerecord.models.answer')
-            = f.text_area :body
-            = f.submit I18n.t('answers.form.edit_save')
-        = link_to (answer.best? ? 'Revert' : 'Best answer'),'',class: 'Best', remote: true
-        = link_to I18n.t('activerecord.attributes.answer.delete'), set_best_question_path(@question, answer), method: :patch, remote: true, class: 'warning button'
+      - if user_signed_in?
+        - if current_user.author_of?(answer.question)
+          = link_to (answer.best? ? 'Revert' : 'Best answer'),'',class: 'select-best-answer', data: { answer_id: answer.id }
+        - if current_user.author_of?(answer)
+          = link_to I18n.t('answers.form.edit'),'', class: 'edit-answer-link', data: { answer_id: answer.id }
+          p
+            = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
+              = f.label :body, I18n.t('activerecord.models.answer')
+              = f.text_area :body
+              = f.submit I18n.t('answers.form.edit_save')
+          = link_to I18n.t('activerecord.attributes.answer.delete'), set_best_answer_path(answer), method: :patch, remote: true, class: 'warning button'
 
 
 
