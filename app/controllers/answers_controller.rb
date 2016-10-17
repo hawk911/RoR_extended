@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
-  before_action :load_answer, only: [:destroy, :update]
+  before_action :load_answer, only: [:destroy, :update, :set_best]
   before_action :check_owner, only: [:destroy]
 
   def create
@@ -20,12 +20,15 @@ class AnswersController < ApplicationController
   end
 
   def set_best
+    @question = @answer.question
+    @answer.toggle_best!
+    response =
     if current_user.author_of?(@question)
-      @question = @answer.question
-      @answer.toggle_best!
+      { success: @answer.best!}
     else
-      render 'common/error', locals: { message: 'Only owner of the question can make answer the best' }, status: :forbidden
+      { success: @answer.best}
     end
+    render json: response
   end
 
   private
