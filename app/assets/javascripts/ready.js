@@ -17,13 +17,13 @@ function ready() {
     e.preventDefault();
     var answerId = $(this).data('answerId');
     var answerSelector = 'div[data-answer-id=' + answerId + ']'
-    $(this).hide();
+    //$(this).hide();
     var answerUrl = "/answers/" + answerId + "/set_best";
     $.post( answerUrl, {}, function( data ) {
       if (data.success) {
-        $( '<span class="glyphicon glyphicon-ok best-answer" aria-hidden="true"></span>' ).prependTo(answerSelector);
+        $( '<span class="best-answer" aria-hidden="true"></span>' ).prependTo(answerSelector);
       } else {
-          alert ('Ошибка!')
+          alert ('Error!')
       }
     });
 

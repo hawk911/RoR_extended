@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
   before_action :load_answer, only: [:destroy, :update, :set_best]
-  before_action :check_owner, only: [:destroy]
+  before_action :check_owner, only: [:destroy, :update]
 
   def create
     @answer = @question.answers.create(answer_params)
@@ -21,14 +21,11 @@ class AnswersController < ApplicationController
 
   def set_best
     @question = @answer.question
-    @answer.toggle_best!
-    response =
     if current_user.author_of?(@question)
-      { success: @answer.best!}
+      @answer.toggle_best!
     else
-      { success: @answer.best}
+      flash[:alert] = 'Error'
     end
-    render json: response
   end
 
   private

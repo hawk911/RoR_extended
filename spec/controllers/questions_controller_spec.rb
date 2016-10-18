@@ -108,9 +108,9 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question.body).to eq 'edit body'
       end
 
-      it 'redirects to update' do
+      it 'render update template' do
         patch :update, params: { id: question, question: attributes_for(:question) }, format: :js
-        expect(response).to redirect_to question
+        expect(response).to render_template :update
       end
     end
 
@@ -118,11 +118,6 @@ RSpec.describe QuestionsController, type: :controller do
       before { patch :update, params: { id: question, question: { title: 'new title', body: '' } } }
       it 'does not change attributes question' do
         expect(assigns(:question)).to_not receive :update
-      end
-
-      it 'render update template' do
-        patch :update, params: { id: question, question: attributes_for(:question) }, format: :js
-        expect(response).to render_template :update
       end
     end
   end

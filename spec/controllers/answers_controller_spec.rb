@@ -5,7 +5,7 @@ RSpec.describe AnswersController, type: :controller do
   let(:answer) { create(:answer, question: question) }
   let(:user) { create :user }
   let(:other_user) { create :user }
-  let(:question_and_answer) { create(:question_with_answers, user: user) }
+
 
 
   describe 'POST #create' do
@@ -116,7 +116,9 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #set_best' do
-  	subject(:set_best) { patch :set_best, params: { id: answer, question_id: question_and_answer, format: :js } }
+    subject(:set_best) { patch :set_best, format: :js, params: { id: answer_to_user } }
+    let!(:user_question) { create(:question, user: user) }
+    let!(:answer_to_user) { create(:answer, question: user_question) }
     describe 'owner of the question' do
       before do
         sign_in user
@@ -124,16 +126,11 @@ RSpec.describe AnswersController, type: :controller do
       end
 
       it 'assigns the best answer to @answer' do
-        expect(assigns(:answer)).to eq answer
+        expect(assigns(:answer)).to eq answer_to_user
       end
 
-      it 'assigns question to @question' do
-        expect(assigns(:question)).to eq question_and_answer
-      end
-
-      it 'make answer the best' do
-        answer.reload
-        expect(answer).to be_best
+      it 'should be set best true at @answer' do
+        expect(assigns(:answer).best).to eq(true)
       end
 
       it 'renders set_best template' do
