@@ -36,12 +36,11 @@ to select the best response
       wait_for_ajax
 
       within "#answer_#{answer_first.id}" do
-      	save_and_open_page
         expect(page).to have_content('Revert')
       end
 
       within '.answers' do
-      	expect(page).to have_content('Best answer')
+        expect(page).to have_content('Best answer')
         expect(page).to have_content('Revert')
       end
     end

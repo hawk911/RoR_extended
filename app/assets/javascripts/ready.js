@@ -1,4 +1,4 @@
-function ready() {
+var ready  = function() {
  $('.edit-question-link').click(function(e) {
    e.preventDefault()
    $(this).hide()
@@ -17,22 +17,13 @@ function ready() {
     e.preventDefault();
     var answerId = $(this).data('answerId');
     var answerSelector = 'div[data-answer-id=' + answerId + ']'
-    //$(this).hide();
-    var answerUrl = "/answers/" + answerId + "/set_best";
-    $.post( answerUrl, {}, function( data ) {
-      if (data.success) {
-        $( '<span class="best-answer" aria-hidden="true"></span>' ).prependTo(answerSelector);
-      } else {
-          alert ('Error!')
-      }
-    });
-
+    $(answerSelector).replaceWith("<%= j render 'answer', answer: @answer %>");
  });
 
 };
-
 //$(document).on('ajax:success', ready);
 //$(document).on('update-object', ready);
+$(document).ready(ready);
 $(document).on('turbolinks:load', ready);
-$(document).ready(ready)
-$(document).on('page:update', ready)
+$(document).on('page:update', ready);
+
