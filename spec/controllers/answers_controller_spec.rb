@@ -5,6 +5,7 @@ RSpec.describe AnswersController, type: :controller do
   let(:answer) { create(:answer, question: question) }
   let(:user) { create :user }
   let(:other_user) { create :user }
+  let(:answer_user) { create(:answer, question: question, user: user)}
 
 
 
@@ -103,13 +104,13 @@ RSpec.describe AnswersController, type: :controller do
       end
 
       it 'change answer attributes' do
-        patch :update, params: { id: answer, question_id: question, answer: { body: 'new body' } }, format: :js
-        answer.reload
-        expect(answer.body).to eq 'new body'
+        patch :update, params: { id: answer_user, question_id: question, answer: { body: 'new body' } }, format: :js
+        answer_user.reload
+        expect(answer_user.body).to eq 'new body'
       end
 
       it 'render update template' do
-        patch :update, params: { id: answer, question_id: question, answer: attributes_for(:answer) }, format: :js
+        patch :update, params: { id: answer_user, question_id: question, answer: attributes_for(:answer) }, format: :js
         expect(response).to render_template :update
       end
     end

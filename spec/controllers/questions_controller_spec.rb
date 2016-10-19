@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question) }
   let(:user) { create (:user) }
+  let(:question_user) { create(:question, user: user)}
 
   describe 'GET#index' do
     let(:questions) { create_list(:question, 2) }
@@ -102,14 +103,14 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it 'change question attributes' do
-        patch :update, params: { id: user_question, question: { title: 'edit title', body: 'edit body' } }, format: :js
-        question.reload
-        expect(question.title).to eq 'edit title'
-        expect(question.body).to eq 'edit body'
+        patch :update, params: { id: question_user, question: { title: 'edit title', body: 'edit body' } }, format: :js
+        question_user.reload
+        expect(question_user.title).to eq 'edit title'
+        expect(question_user.body).to eq 'edit body'
       end
 
       it 'render update template' do
-        patch :update, params: { id: question, question: attributes_for(:question) }, format: :js
+        patch :update, params: { id: question_user, question: attributes_for(:question) }, format: :js
         expect(response).to render_template :update
       end
     end
