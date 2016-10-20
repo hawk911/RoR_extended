@@ -9,7 +9,29 @@ AllCops:
     - 'spec/**/*'
     - 'db/*.rb'
     - 'bin/**/*'
+  UseCache: false
   DisplayCopNames: true
+  DisplayStyleGuide: true
+  ExtraDetails: true
+  TargetRubyVersion: 2.3
 
 Metrics/LineLength:
 Max: 95
+
+Rails:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/LambdaCall:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
