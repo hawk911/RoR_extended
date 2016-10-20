@@ -2,5 +2,15 @@
   div id="answer_#{answer.id}"
     = answer.body
     .links
-      - if user_signed_in? && current_user.author_of?(answer)
-        = link_to I18n.t('activerecord.attributes.answer.delete'), answer, method: :delete
+      - if user_signed_in?
+        - if current_user.author_of?(answer.question)
+          = link_to (answer.best? ? 'Revert' : 'Best answer'),set_best_answer_path(answer),class: 'select-best-answer', remote:true, method: :patch
+        - if current_user.author_of?(answer)
+          = link_to I18n.t('answers.form.edit'),'', class: 'edit-answer-link', data: { answer_id: answer.id }
+          p
+            = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
+              = f.label :body, I18n.t('activerecord.models.answer')
+              = f.text_area :body
+              = f.submit I18n.t('answers.form.edit_save')
+          = link_to I18n.t('activerecord.attributes.answer.delete'), answer, method: :delete, remote:true
+

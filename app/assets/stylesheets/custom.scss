@@ -1,0 +1,38 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.best-answer {
+  color: green;
+}
+
+#answer {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 20px;
+  overflow: hidden;
+  border: none;
+  font: normal 20px/1 "Times New Roman", Times, serif;
+  color: rgba(17,16,16,1);
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: rgb(200,200,200);
+  -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
+}
+
+#question {
+   -webkit-box-sizing: content-box;
+   -moz-box-sizing: content-box;
+   box-sizing: content-box;
+   padding: 20px;
+   overflow: hidden;
+   border: none;
+   font: normal 16px/1 "Times New Roman", Times, serif;
+   -o-text-overflow: ellipsis;
+   text-overflow: ellipsis;
+   -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+   box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+   text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
+ }

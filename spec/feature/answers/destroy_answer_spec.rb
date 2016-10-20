@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../feature_helper'
 
 feature 'Destroy answer', '
   Authenticated user can delete
@@ -34,7 +34,7 @@ feature 'Destroy answer', '
   end
 
   context 'non-Authenticated user destroy answer' do
-    scenario 'destroy answer' do
+    scenario 'destroy answer', js:true do
       visit question_path(question)
       within '.answers' do
         expect(page).not_to have_link(I18n.t('activerecord.attributes.answer.delete'))

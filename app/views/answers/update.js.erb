@@ -3,6 +3,7 @@ $(".alert").remove();
 <% if @answer.errors.present? %>
   $('.errors').append('<%= j render "common/errors", resourse: @answer %>').appendTo(".errors");
 <% else %>
-  $('.answers').append('<%= j render @answer %>');
-  $('textarea#answer_body').val('');
+  $("#answer_<%=@answer.id %>").replaceWith("<%= j render @answer %>");
+  $('form#edit-answer-<%= @answer.id %>').hide();
+  $('.edit-answer-link').show();
 <% end %>

@@ -1,8 +1,8 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
-  before_action :load_answer, only: [:destroy]
-  before_action :check_owner, only: [:destroy]
+  before_action :load_answer, only: [:destroy, :update, :set_best]
+  before_action :check_owner, only: [:destroy, :update]
 
   def create
     @answer = @question.answers.create(answer_params)
@@ -10,9 +10,22 @@ class AnswersController < ApplicationController
     flash[:notice] = t('flash.success.new_answer') if @answer.save
   end
 
+  def update
+    @answer.update(answer_params)
+  end
+
   def destroy
     @answer.destroy
     redirect_to @answer.question, notice: t('flash.success.delete_answer')
+  end
+
+  def set_best
+    @question = @answer.question
+    if current_user.author_of?(@question)
+      @answer.toggle_best!
+    else
+      flash[:alert] = 'Error'
+    end
   end
 
   private

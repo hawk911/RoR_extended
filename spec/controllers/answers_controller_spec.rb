@@ -1,9 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
-  let(:question) { create(:question) }
+  let!(:question) { create(:question) }
   let(:answer) { create(:answer, question: question) }
   let(:user) { create :user }
+  let(:other_user) { create :user }
+  let(:answer_user) { create(:answer, question: question, user: user)}
+
+
 
   describe 'POST #create' do
     sign_in_user
@@ -13,9 +17,9 @@ RSpec.describe AnswersController, type: :controller do
         expect { post :create, params: { question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
       end
 
-      it 'redirects to show view' do
-        post :create, params: { question_id: question, answer: attributes_for(:answer) }
-        expect(response).to redirect_to assigns(:question)
+      it 'render update template' do
+        post :create, params: { question_id: question, answer: attributes_for(:answer) }, format: :js
+        expect(response).to render_template :create
       end
 
       it 'user owned answer' do
@@ -87,6 +91,63 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'redirect to new user session ' do
         should redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+  describe 'PATCH #update' do
+    before { sign_in user }
+    context 'valid attributes' do
+      it 'assigns the requested answer to @answer' do
+        patch :update, params: { id: answer, question_id: question, answer: attributes_for(:answer) }, format: :js
+        expect(assigns(:answer)).to eq answer
+      end
+
+      it 'change answer attributes' do
+        patch :update, params: { id: answer_user, question_id: question, answer: { body: 'new body' } }, format: :js
+        answer_user.reload
+        expect(answer_user.body).to eq 'new body'
+      end
+
+      it 'render update template' do
+        patch :update, params: { id: answer_user, question_id: question, answer: attributes_for(:answer) }, format: :js
+        expect(response).to render_template :update
+      end
+    end
+  end
+
+  describe 'PATCH #set_best' do
+    subject(:set_best) { patch :set_best, format: :js, params: { id: answer_to_user } }
+    let!(:user_question) { create(:question, user: user) }
+    let!(:answer_to_user) { create(:answer, question: user_question) }
+    describe 'owner of the question' do
+      before do
+        sign_in user
+        set_best
+      end
+
+      it 'assigns the best answer to @answer' do
+        expect(assigns(:answer)).to eq answer_to_user
+      end
+
+      it 'should be set best true at @answer' do
+        expect(assigns(:answer).best).to eq(true)
+      end
+
+      it 'renders set_best template' do
+        expect(response).to render_template :set_best
+      end
+    end
+
+    describe 'not owner of the question' do
+      before do
+        sign_in other_user
+        set_best
+      end
+
+      it 'could not make answer the best' do
+        answer.reload
+        expect(answer).to_not be_best
       end
     end
   end

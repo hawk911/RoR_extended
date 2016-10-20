@@ -25,6 +25,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+# bootstrap
+gem 'bootstrap-sass', '~> 3.3.6'
+# jquery-turbolinks
+gem 'jquery-turbolinks'
 
 # devise
 gem 'devise'
@@ -39,15 +43,15 @@ group :development, :test do
   gem 'factory_girl_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'selenium-webdriver'
+  gem 'capybara'
+  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'pry-rails'
- end
+end
 
 # shoulda-matchers, capybara, controller testing
 group :test do
   gem 'shoulda-matchers'
-  gem 'capybara'
   gem 'launchy'
   gem 'rails-controller-testing'
 end

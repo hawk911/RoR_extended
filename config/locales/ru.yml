@@ -2,11 +2,15 @@ ru:
   questions:
     form:
       submit: 'Создать вопрос'
+      edit: 'Редактировать'
+      edit_save: 'Изменить вопрос'
     index:
       ask: 'Задать вопрос'
   answers:
     form:
+      edit: 'Редактировать'
       submit: 'Создать ответ'
+      edit_save: 'Изменить ответ'
   layouts:
     application:
       hello: 'Добро пожаловать'
