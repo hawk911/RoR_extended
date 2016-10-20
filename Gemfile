@@ -37,6 +37,9 @@ gem 'slim-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+#carrierwave - attach files
+gem 'carrierwave'
+
 # test
 group :development, :test do
   gem 'rspec-rails'
