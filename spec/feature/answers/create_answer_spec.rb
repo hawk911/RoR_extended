@@ -22,9 +22,7 @@ feature 'Create Answer', '
 
       expect(page).to have_content('text answer')
       expect(page).to have_current_path(question_path(question))
-
     end
-
   end
 
   context 'Authenticated user invalid answer' do
@@ -52,7 +50,7 @@ feature 'Create Answer', '
 
       wait_for_ajax
 
-      expect(page).not_to  have_content('text answer')
+      expect(page).not_to have_content('text answer')
     end
   end
 end

@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question) }
-  let(:user) { create (:user) }
-  let(:question_user) { create(:question, user: user)}
+  let(:user) { create :user }
+  let(:question_user) { create(:question, user: user) }
 
   describe 'GET#index' do
     let(:questions) { create_list(:question, 2) }
@@ -58,7 +58,7 @@ RSpec.describe QuestionsController, type: :controller do
       it 'saves the new question in the base' do
         expect do
           post :create,
-            params: { question: attributes_for(:question) }
+               params: { question: attributes_for(:question) }
         end.to change(Question, :count).by(1)
       end
 
@@ -82,7 +82,7 @@ RSpec.describe QuestionsController, type: :controller do
       it 'does not save question' do
         expect do
           post :create,
-            params: { question: attributes_for(:invalid_question) }
+               params: { question: attributes_for(:invalid_question) }
         end.to_not change(Question, :count)
       end
 

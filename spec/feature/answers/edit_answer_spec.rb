@@ -1,10 +1,10 @@
 require_relative '../feature_helper'
 
-feature 'User edit answer', %q{
+feature 'User edit answer', '
   In orderto fix mistake
   As owner of answer
   I want edit my answer
-} do
+' do
 
   given(:user) { create(:user) }
   given!(:other_user) { create :user }
@@ -21,13 +21,12 @@ feature 'User edit answer', %q{
       within '.answers' do
         expect(page).to have_content I18n.t('questions.form.edit')
       end
-
     end
 
     scenario 'edits with valid attributes', js: true do
       within '.answers' do
         click_on I18n.t('answers.form.edit')
-        fill_in I18n.t('activerecord.models.answer'), with: "edit answer"
+        fill_in I18n.t('activerecord.models.answer'), with: 'edit answer'
         click_on I18n.t('answers.form.edit_save')
 
         wait_for_ajax
@@ -36,7 +35,6 @@ feature 'User edit answer', %q{
         expect(page).to have_content 'edit answer'
         expect(page).to_not have_selector 'textarea'
       end
-
     end
 
     scenario 'edits with invalid attributes', js: true do
@@ -67,7 +65,6 @@ feature 'User edit answer', %q{
       end
     end
   end
-
 
   scenario 'Non-Authenticated User edit', js: true do
     visit question_path(question)

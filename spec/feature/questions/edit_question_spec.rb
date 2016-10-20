@@ -1,10 +1,10 @@
 require_relative '../feature_helper'
 
-feature 'User edit question', %q{
+feature 'User edit question', '
   In order to fix mistake
   As owner of question
   I want edit my question
-} do
+' do
 
   given(:user) { create(:user) }
   given!(:other_user) { create :user }

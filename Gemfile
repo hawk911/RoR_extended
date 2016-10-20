@@ -37,7 +37,7 @@ gem 'slim-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-#carrierwave - attach files
+# carrierwave - attach files
 gem 'carrierwave'
 
 # test

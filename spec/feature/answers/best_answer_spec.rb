@@ -6,9 +6,9 @@ to select the best response
 ' do
 
   given(:user) { create(:user) }
-  given!(:question) { create(:question, user: user)}
-  given!(:answer_first) { create(:answer, user: user, question: question)}
-  given!(:answer_second) { create(:answer, user: user, question: question)}
+  given!(:question) { create(:question, user: user) }
+  given!(:answer_first) { create(:answer, user: user, question: question) }
+  given!(:answer_second) { create(:answer, user: user, question: question) }
 
   context 'Authenticated user' do
     before do
@@ -20,7 +20,7 @@ to select the best response
       wait_for_ajax
 
       within '.answers' do
-        question.answers. each do |answer|
+        question.answers. each do |_answer|
           expect(page).to have_content('Best answer')
         end
         expect(page).to_not have_content('Revert')
@@ -28,7 +28,6 @@ to select the best response
     end
 
     scenario 'vote answer', js: true do
-
       within "#answer_#{answer_first.id}" do
         click_on 'Best answer'
       end
@@ -46,7 +45,6 @@ to select the best response
     end
 
     scenario 'user vote against the aswer', js: true do
-
     end
   end
 
