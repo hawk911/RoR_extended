@@ -17,7 +17,7 @@ var ready  = function() {
     e.preventDefault();
     var answerId = $(this).data('answerId');
     var answerSelector = 'div[data-answer-id=' + answerId + ']'
-    $(answerSelector).replaceWith("<%= j render 'answer', answer: @answer %>");
+    $(answerSelector).replaceWith("<%= j render @answer %>");
  });
 
 };
