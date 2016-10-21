@@ -1,17 +1,17 @@
 var ready  = function() {
- $('.edit-question-link').click(function(e) {
+ $('body').on('click', '.edit-question-link', function(e) { 
    e.preventDefault()
    $(this).hide()
    question_id = $(this).data('questionId')
    $('form#edit-question-' + question_id).show()
  });
 
-  $('.edit-answer-link').click(function(e) {
-   e.preventDefault()
-   $(this).hide()
-   answer_id = $(this).data('answerId')
-   $('form#edit-answer-' + answer_id).show()
- });
+$('body').on('click', '.edit-answer-link', function(e) {
+  e.preventDefault()
+  $(this).hide()
+  answer_id = $(this).data('answerId')
+  $('form#edit-answer-' + answer_id).show()
+});
 
  $('.select-best-answer').click(function(e) {
     e.preventDefault();
