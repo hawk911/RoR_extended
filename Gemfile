@@ -55,6 +55,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'pry-rails'
+  gem 'pry'
 end
 
 # shoulda-matchers, capybara, controller testing
