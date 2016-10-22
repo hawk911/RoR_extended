@@ -37,10 +37,13 @@ gem 'slim-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# carrierwave - attach files
+# Attach files
 gem 'carrierwave'
-# remotipart - for attach file
+# For attach file (AJAX style file uploads)
 gem 'remotipart'
+# Unobtrusive nested forms handling, using jQuery.
+gem 'cocoon'
+
 
 # test
 group :development, :test do
