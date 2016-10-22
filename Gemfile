@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
 # jquery-turbolinks
-gem 'jquery-turbolinks'
+#gem 'jquery-turbolinks'
 
 # devise
 gem 'devise'
@@ -39,6 +39,8 @@ gem 'slim-rails'
 
 # carrierwave - attach files
 gem 'carrierwave'
+# remotipart - for attach file
+gem 'remotipart'
 
 # test
 group :development, :test do
