@@ -18,4 +18,8 @@ RSpec.describe Question, type: :model do
       expect(Question.ordered).to eq questions.reverse
     end
   end
+
+  context 'attachments' do
+    it { should accept_nested_attributes_for :attachments }
+  end
 end
