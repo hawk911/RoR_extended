@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
 # jquery-turbolinks
-#gem 'jquery-turbolinks'
+# gem 'jquery-turbolinks'
 
 # devise
 gem 'devise'
@@ -43,7 +43,6 @@ gem 'carrierwave'
 gem 'remotipart'
 # Unobtrusive nested forms handling, using jQuery.
 gem 'cocoon'
-
 
 # test
 group :development, :test do
