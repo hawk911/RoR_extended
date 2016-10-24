@@ -17,10 +17,13 @@ context 'Authenticated user' do
     click_on I18n.t('questions.index.ask')
     fill_in I18n.t('activerecord.attributes.question.title'), with: 'Test question'
     fill_in I18n.t('activerecord.attributes.question.body'), with: 'Body question'
-    attach_file 'File', "#{Rail.root}/spec/spec_helper.rb"
+    attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
     click_on I18n.t('questions.form.submit')
 
+    within(".question") do
     expect(page).to have_content 'spec_helper.rb'
+    end
+
   end
 
   scenario 'user create invalid question with file' do
