@@ -8,6 +8,7 @@ RSpec.describe Question, type: :model do
 
   context 'association' do
     it { should have_many(:answers).dependent(:destroy) }
+    it { should have_many(:attachments) }
   end
 
   context 'ordered' do
