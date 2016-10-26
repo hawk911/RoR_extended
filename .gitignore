@@ -21,3 +21,7 @@ config/database.yml
 
 # Ignore rake
 .rake_tasks~
+
+
+# Ignote file
+/public/uploads/*
