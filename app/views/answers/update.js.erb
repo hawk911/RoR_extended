@@ -3,7 +3,16 @@ $(".alert").remove();
 <% if @answer.errors.present? %>
   $('.errors').append('<%= j render "common/errors", resourse: @answer %>').appendTo(".errors");
 <% else %>
-  $("#answer_<%=@answer.id %>").replaceWith("<%= j render @answer %>");
+  <%if remotipart_submitted? %>
+    $("#answer_<%=@answer.id %>").replaceWith("<%= j "#{ render @answer }" %>");
+    <% else %>
+   $("#answer_<%=@answer.id %>").replaceWith("<%= j render @answer %>");
+  <% end %>
   $('form#edit-answer-<%= @answer.id %>').hide();
   $('.edit-answer-link').show();
 <% end %>
+
+
+
+
+
