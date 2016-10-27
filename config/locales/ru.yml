@@ -4,6 +4,8 @@ ru:
       submit: 'Создать вопрос'
       edit: 'Редактировать'
       edit_save: 'Изменить вопрос'
+      add_file: 'Добавить файл'
+      delete_file: 'Удалить файл'
     index:
       ask: 'Задать вопрос'
   answers:
