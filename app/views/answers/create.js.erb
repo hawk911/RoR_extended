@@ -3,6 +3,10 @@ $(".alert").remove();
 <% if @answer.errors.present? %>
   $('.errors').append('<%= j render "common/errors", resourse: @answer %>').appendTo(".errors");
 <% else %>
-  $('.answers').append('<%= j render @answer %>');
+ <%if remotipart_submitted? %>
+    $('.answers').append("<%= j "#{ render @answer }" %>");
+  <% else %>
+    $('.answers').append("<%= j render @answer %>");
+  <% end %>
   $('textarea#answer_body').val('');
 <% end %>

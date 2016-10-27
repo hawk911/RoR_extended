@@ -1,6 +1,7 @@
 -if answer.persisted?
   div id="answer_#{answer.id}"
-    = answer.body
+    p = answer.body
+    = render answer.attachments
     .links
       - if user_signed_in?
         - if current_user.author_of?(answer.question)
