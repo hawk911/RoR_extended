@@ -24,4 +24,4 @@ config/database.yml
 
 
 # Ignote file
-/public/uploads/*
+# /public/uploads/*
