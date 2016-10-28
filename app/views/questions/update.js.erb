@@ -3,8 +3,7 @@ $(".alert").remove();
 <% if @question.errors.present? %>
   $('.errors').append('<%= j render "common/errors", resourse: @question %>').appendTo(".errors");
 <% else %>
-  console.log('Edit Question');
-  $('.question_wrap').html("<%= j render 'question_with_attachments' %>");
+  $('.question_attachment').html("<%= j render 'question_with_attachments' %>");
   $('form#edit-question-<%= @question.id %>').hide();
   $('.edit-question-link').show();
 <% end %>

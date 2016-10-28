@@ -1,5 +1,5 @@
 var ready  = function() {
- $('body').on('click', '.edit-question-link', function(e) { 
+ $('body').on('click', '.edit-question-link', function(e) {
    e.preventDefault()
    $(this).hide()
    question_id = $(this).data('questionId')
@@ -21,8 +21,7 @@ $('body').on('click', '.edit-answer-link', function(e) {
  });
 
 };
-//$(document).on('ajax:success', ready);
-//$(document).on('update-object', ready);
+
 $(document).ready(ready);
 $(document).on('turbolinks:load', ready);
 $(document).on('page:update', ready);
