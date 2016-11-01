@@ -1,2 +1,4 @@
 = render @question
-= render @question.attachments
+- if @question.attachments.exists?
+  = render @question.attachments
+
