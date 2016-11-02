@@ -11,8 +11,6 @@ p
           = f.submit I18n.t('questions.form.edit_save')
       = link_to I18n.t('questions.form.edit'), '', class: 'edit-question-link', data: { question_id: @question.id }
       = link_to I18n.t('activerecord.attributes.question.delete'), question_path(@question), method: :delete
-
-      = render 'form'
   p
 .answers
   = render @question.answers
