@@ -20,6 +20,11 @@ $('body').on('click', '.edit-answer-link', function(e) {
     $(answerSelector).replaceWith("<%= j render @answer %>");
  });
 
+ $('.remove_file_field').click(function(e) {
+    e.preventDefault();
+    $(this).parent().remove();
+  });
+
 };
 
 $(document).ready(ready);

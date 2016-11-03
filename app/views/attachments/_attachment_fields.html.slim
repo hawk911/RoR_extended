@@ -1,8 +1,5 @@
 .nested-fields
-  - if f.object.new_record?
-    = f.label :file
-    = f.file_field :file
-  - else
-    p
-      = f.object.file.filename
-      = link_to_remove_association I18n.t('questions.form.delete_file'), f
+  = f.label :file
+  = f.file_field :file
+  = link_to I18n.t('questions.form.delete_file'), '', class: 'remove_file_field'
+
