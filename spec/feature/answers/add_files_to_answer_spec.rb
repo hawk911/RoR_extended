@@ -16,15 +16,14 @@ context 'Authenticated user' do
   end
   scenario 'user create valid answer with file', js: true do
     fill_in I18n.t('activerecord.attributes.answer.body'), with: 'text answer'
-    save_and_open_page
     within all('.nested-fields').first do
       attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
     end
 
     click_on I18n.t('answers.form.submit')
-
+    save_and_open_page
     within(".answer") do
-       expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
+      expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
     end
 
   end
