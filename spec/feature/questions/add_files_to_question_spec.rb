@@ -57,26 +57,6 @@ context 'Authenticated user' do
       expect(page).to have_content (I18n.t('activerecord.attributes.question.title') +
                                       ' ' + I18n.t('errors.messages.blank'))
     end
-
-  end
-
-  scenario 'user delete file', js: true do
-    visit question_path(question_attachment)
-
-    expect(page).to have_link I18n.t('questions.form.delete_file')
-
-    within '.question' do
-      expect(page).to have_link 'rails_helper.rb'
-      within '.question_attachment' do
-        click_on I18n.t('questions.form.delete_file')
-      end
-    end
-
-    visit question_path(question_attachment)
-
-    wait_for_ajax
-
-    expect(page).to_not have_link I18n.t('questions.form.delete_file')
   end
 end
 
@@ -88,9 +68,7 @@ context 'Other user' do
   scenario 'can not add file', js: true do
     expect(page).to_not have_link I18n.t('questions.form.add_file')
   end
-  scenario 'cannot delete file', js: true do
-    expect(page).to_not have_link I18n.t('questions.form.delete_file')
-  end
+
 end
 
 context 'No-Authenticated user' do
@@ -99,7 +77,6 @@ context 'No-Authenticated user' do
     within '.question' do
       expect(page).to_not have_link I18n.t('questions.form.add_file')
     end
-
   end
 end
 end
