@@ -4,7 +4,4 @@
       - @question.attachments.each do |attach|
         li id="attachment_#{attach.id}"
            = link_to attach.file.filename, attach.file.url
-           = link_to t('questions.form.delete_file'), attach, method: 'delete', remote: true, class: 'remove_file_field'
-
-
-
+           = link_to I18n.t('questions.form.delete_file'), '', class: 'remove_file_field' if user_signed_in? && current_user.author_of?(@question)

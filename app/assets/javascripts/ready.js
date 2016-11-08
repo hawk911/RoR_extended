@@ -19,12 +19,6 @@ $('body').on('click', '.edit-answer-link', function(e) {
     var answerSelector = 'div[data-answer-id=' + answerId + ']'
     $(answerSelector).replaceWith("<%= j render @answer %>");
  });
-
- $('.remove_file_field').click(function(e) {
-    e.preventDefault();
-    $(this).parent().remove();
-  });
-
 };
 
 $(document).ready(ready);
