@@ -35,6 +35,10 @@ RSpec.describe QuestionsController, type: :controller do
     it 'render show view' do
       expect(response).to render_template :show
     end
+
+    it 'show answer attachments' do
+      expect(assigns(:answer).attachments.first).to be_a_new(Attachment)
+    end
   end
 
   describe 'GET #new' do
@@ -98,7 +102,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    let(:user_question) { create(:question, user: user) }
     before { sign_in user }
     context 'valid attributes' do
       it 'assigns the requested question to @question' do
@@ -112,6 +115,21 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question_user.title).to eq 'edit title'
         expect(question_user.body).to eq 'edit body'
       end
+
+      it 'remove attachment file' do
+            question_attachment = create(:question_attachment, attachable: question)
+            expect {
+              patch :update, params: {
+                id: question,
+                question: {
+                  title: question_user.title,
+                  body: question_user.body,
+                  attachments_attributes: { "0": {_destroy: 1, id: question_attachment} },
+                format: :js
+                }
+              }
+            }.to change(question.attachments, :count).by(-1)
+          end
 
       it 'render update template' do
         patch :update, params: { id: question_user, question: attributes_for(:question) }, format: :js
