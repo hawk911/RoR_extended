@@ -8,7 +8,8 @@ feature 'Add files to answer', %q{
 
 context 'Authenticated user' do
   given(:user) { create(:user) }
-  given!(:question) { create(:question, user: user) }
+  given!(:question) { create(:question) }
+  given!(:answer) { create(:answer, user: user)}
 
   background do
     sign_in(user)
@@ -28,8 +29,14 @@ context 'Authenticated user' do
 
   end
 
-  scenario 'user create invalid answer with file' do
+  scenario 'user create invalid answer with file', js: true do
+  	fill_in I18n.t('activerecord.attributes.answer.body'), with: ''
+    within all('.nested-fields').first do
+      attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
+    end
 
+    click_on I18n.t('answers.form.submit')
+    save_and_open_page
   end
 
   scenario 'user delete file' do

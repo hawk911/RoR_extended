@@ -12,7 +12,7 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with validate attributes' do
       it 'saves the new answer in the base' do
-        expect { post :create, params: { question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
+        expect { post :create, params: { question_id: question, answer: attributes_for(:answer) }, format: :js }.to change(question.answers, :count).by(1)
       end
 
       it 'render update template' do
@@ -21,13 +21,13 @@ RSpec.describe AnswersController, type: :controller do
       end
 
       it 'user owned answer' do
-        expect { post :create, params: { answer: attributes_for(:answer), question_id: question.id } }.to change(@user.answers, :count).by(1)
+        expect { post :create, params: { answer: attributes_for(:answer), question_id: question.id }, format: :js }.to change(@user.answers, :count).by(1)
       end
     end
 
     context 'create with invalid attributes' do
       it 'does not save a new answer into the database' do
-        expect { post :create, params: { question_id: question, answer: attributes_for(:invalid_answer) } }.to_not change(Answer, :count)
+        expect { post :create, params: { question_id: question, answer: attributes_for(:invalid_answer) }, format: :js }.to_not change(Answer, :count)
       end
     end
   end
@@ -49,7 +49,7 @@ RSpec.describe AnswersController, type: :controller do
 
         it 'user destroy your answer' do
           expect { delete :destroy, params: { id: user_answer2, question_id: question_with_answers } }
-            .to change(Answer, :count).by(-1)
+          .to change(Answer, :count).by(-1)
         end
 
         it 'redirect to question page' do
@@ -66,7 +66,7 @@ RSpec.describe AnswersController, type: :controller do
 
         it 'the user can not delete not the answer' do
           expect { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
-            .not_to change(Answer, :count)
+          .not_to change(Answer, :count)
         end
 
         it 'redirect to question page' do
@@ -84,7 +84,7 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'no-authenticated user can not delete question' do
         expect { delete :destroy, params: { id: answers[0], question_id: question_with_answers } }
-          .not_to change(Answer, :count)
+        .not_to change(Answer, :count)
       end
 
       it 'redirect to new user session ' do
@@ -94,6 +94,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #update' do
+    let!(:answer_attachment) { create(:answer_attachment, attachable: answer_user) }
     before { sign_in user }
     context 'valid attributes' do
       it 'assigns the requested answer to @answer' do
@@ -105,6 +106,19 @@ RSpec.describe AnswersController, type: :controller do
         patch :update, params: { id: answer_user, question_id: question, answer: { body: 'new body' } }, format: :js
         answer_user.reload
         expect(answer_user.body).to eq 'new body'
+      end
+
+      it 'deletes attachments' do
+        expect {
+          patch :update, params: {
+            id: answer,
+            question_id: question.id,
+            answer: {
+              body: answer_user.body,
+              attachments_attributes: { "0": { _destroy: 1, id: answer_attachment } }
+            }
+          }
+        }.to change(answer_user.attachments, :count).by(-1)
       end
 
       it 'render update template' do
