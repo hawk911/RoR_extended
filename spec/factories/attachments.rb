@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :attachment do
-    file { Rack::Test::UploadedFile.new("#{ Rails.root }/spec/rails_helper.rb") }
+    file { Rack::Test::UploadedFile.new("#{Rails.root}/spec/rails_helper.rb") }
 
     factory :question_attachment do
       association :attachable, factory: :question
