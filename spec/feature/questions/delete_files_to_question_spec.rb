@@ -32,6 +32,7 @@ feature 'Delete files to question', "
       wait_for_ajax
 
       expect(page).to_not have_link I18n.t('questions.form.delete_file')
+      expect(page).to_not have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/rails_helper.rb'
     end
   end
   context 'Other user' do

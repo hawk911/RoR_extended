@@ -17,6 +17,7 @@ feature 'Add files to answer', "
     end
     scenario 'user create valid answer with file', js: true do
       fill_in I18n.t('activerecord.attributes.answer.body'), with: 'text answer'
+      save_and_open_page
       within all('.nested-fields').first do
         attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
       end
