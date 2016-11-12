@@ -116,21 +116,6 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question_user.body).to eq 'edit body'
       end
 
-      it 'remove attachment file' do
-            question_attachment = create(:question_attachment, attachable: question)
-            expect {
-              patch :update, params: {
-                id: question,
-                question: {
-                  title: question_user.title,
-                  body: question_user.body,
-                  attachments_attributes: { "0": {_destroy: 1, id: question_attachment} },
-                format: :js
-                }
-              }
-            }.to change(question.attachments, :count).by(-1)
-          end
-
       it 'render update template' do
         patch :update, params: { id: question_user, question: attributes_for(:question) }, format: :js
         expect(response).to render_template :update

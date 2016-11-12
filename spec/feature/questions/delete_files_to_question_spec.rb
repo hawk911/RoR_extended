@@ -26,10 +26,9 @@ feature 'Delete files to question', "
           click_on I18n.t('questions.form.delete_file')
         end
       end
+      wait_for_ajax
 
       visit question_path(question_attachment)
-
-      wait_for_ajax
 
       expect(page).to_not have_link I18n.t('questions.form.delete_file')
       expect(page).to_not have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/rails_helper.rb'
