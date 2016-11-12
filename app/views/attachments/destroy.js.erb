@@ -1,0 +1,4 @@
+$(".alert").remove();
+attachmentId = "<%= j @attachment.id.to_s %>"
+$('#attachment_' + attachmentId).remove();
+$(".flash").html("<%= j render('layouts/flash') %>");
