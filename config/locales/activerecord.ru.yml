@@ -8,6 +8,7 @@ ru:
       answer:
         body: 'Ответ'
         delete: 'Удалить'
+        title: 'Ответ'
       question:
         title: 'Наименование'
         body: 'Вопрос'

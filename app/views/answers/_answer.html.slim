@@ -1,7 +1,13 @@
 -if answer.persisted?
   div id="answer_#{answer.id}"
     p = answer.body
-    = render answer.attachments
+    - if answer.attachments.exists?
+    .attachments
+       ul
+        - answer.attachments.each do |attach|
+           li id="attachment_#{attach.id}"
+            = link_to attach.file.identifier, attach.file.url
+            = link_to t('general.destroy'), attach, method: 'delete', remote: true, class: 'litle_link' if user_signed_in? && current_user.author_of?(answer)
     .links
       - if user_signed_in?
         - if current_user.author_of?(answer.question)

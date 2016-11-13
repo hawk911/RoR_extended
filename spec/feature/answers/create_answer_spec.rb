@@ -6,8 +6,8 @@ feature 'Create Answer', '
   I want to be able to create answers
 ' do
 
-  given(:question) { create(:question) }
   given(:user) { create(:user) }
+  given(:question) { create(:question) }
 
   context 'Authenticated user' do
     before do
