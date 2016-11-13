@@ -8,7 +8,7 @@ feature 'Delete files to question', "
   given(:user) { create(:user) }
   given(:question) { create(:question, user: user) }
   given(:other_user) { create(:user) }
-  given(:question_attachment) { create(:question_attachment, attachable: question) }
+  given!(:question_attachment) { create(:question_attachment, attachable: question) }
   context 'Authenticated user' do
     background do
       sign_in(user)
@@ -16,7 +16,7 @@ feature 'Delete files to question', "
     end
 
     scenario 'user delete file', js: true do
-      visit question_path(question_attachment)
+      visit question_path(question_attachment.attachable)
 
       expect(page).to have_link I18n.t('questions.form.delete_file')
 
@@ -28,7 +28,7 @@ feature 'Delete files to question', "
       end
       wait_for_ajax
 
-      visit question_path(question_attachment)
+      visit question_path(question_attachment.attachable)
 
       expect(page).to_not have_link I18n.t('questions.form.delete_file')
       expect(page).to_not have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/rails_helper.rb'

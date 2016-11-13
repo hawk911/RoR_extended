@@ -13,6 +13,8 @@ ru:
       edit: 'Редактировать'
       submit: 'Создать ответ'
       edit_save: 'Изменить ответ'
+      add_file: 'Добавить файл'
+      delete_file: 'Удалить файл'
   layouts:
     application:
       hello: 'Добро пожаловать'
