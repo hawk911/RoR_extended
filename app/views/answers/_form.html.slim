@@ -4,7 +4,7 @@
   = f.label :body
   = f.text_area :body
   .attachments
-    - if user_signed_in? && current_user.author_of?(@answer)
+    - if user_signed_in?
       = render 'attachments/form', f: f
   p
   = f.submit t('.submit')

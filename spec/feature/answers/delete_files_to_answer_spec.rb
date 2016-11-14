@@ -14,13 +14,16 @@ feature 'Delete files to answer', "
       sign_in(user)
       visit question_path(question)
       fill_in 'answer_body', with: 'answer'
-      attach_file 'answer_attachments_attributes_0_file', "#{Rails.root}/spec/spec_helper.rb"
+      within ('.nested-fields') do
+        attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
+      end
       click_on I18n.t('answers.form.submit')
     end
+
     scenario 'user delete file', js: true do
       expect(page).to have_link I18n.t('answers.form.delete_file')
 
-      within '.answer' do
+      within '.new_answer' do
         expect(page).to have_link 'rails_helper.rb'
         within '.answer_attachment' do
           click_on I18n.t('answers.form.delete_file')
@@ -35,12 +38,20 @@ feature 'Delete files to answer', "
     end
   end
   context 'Other user' do
+    given!(:attachment) { create(:answer_attachment) }
+    given!(:question2) { attachment.attachable.question }
+
     background do
       sign_in(other_user)
-      visit question_path(question)
+      visit question_path(question2)
     end
     scenario 'cannot delete file', js: true do
-      expect(page).to_not have_link I18n.t('answers.form.delete_file')
+      save_and_open_page
+      within '.answers'	 do
+        within('.attachments') do
+          expect(page).to_not have_link I18n.t('answers.form.delete_file')
+        end
+      end
     end
   end
 end

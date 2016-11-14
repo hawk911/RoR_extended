@@ -55,7 +55,7 @@ feature 'Add files to question', "
 
       within '.question_errors' do
         expect(page).to have_content (I18n.t('activerecord.attributes.question.title') +
-                                        ' ' + I18n.t('errors.messages.blank'))
+                                      ' ' + I18n.t('errors.messages.blank'))
       end
     end
   end
@@ -66,7 +66,9 @@ feature 'Add files to question', "
       visit question_path(question_attachment)
     end
     scenario 'can not add file', js: true do
-      expect(page).to_not have_link I18n.t('questions.form.add_file')
+      within '.question_attachment' do
+        expect(page).to_not have_link I18n.t('questions.form.add_file')
+      end
     end
   end
 
