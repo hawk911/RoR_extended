@@ -23,9 +23,9 @@ feature 'Delete files to answer', "
     scenario 'user delete file', js: true do
       expect(page).to have_link I18n.t('answers.form.delete_file')
 
-      within '.new_answer' do
+      within '.question' do
         expect(page).to have_link 'rails_helper.rb'
-        within '.answer_attachment' do
+        within '.attachments' do
           click_on I18n.t('answers.form.delete_file')
         end
       end

@@ -7,6 +7,8 @@ RSpec.configure do |config|
 
   config.use_transactional_fixtures = false
 
+  Capybara.server_port = 3100
+
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end

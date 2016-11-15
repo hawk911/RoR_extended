@@ -15,6 +15,9 @@ ru:
       edit_save: 'Изменить ответ'
       add_file: 'Добавить файл'
       delete_file: 'Удалить файл'
+  attachment:
+    form:
+      delete_attach: 'Удалить файл'
   layouts:
     application:
       hello: 'Добро пожаловать'
