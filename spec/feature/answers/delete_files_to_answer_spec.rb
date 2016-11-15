@@ -6,7 +6,7 @@ feature 'Delete files to answer', "
    " do
 
   given!(:user) { create(:user) }
-  given!(:question) { create(:question_with_answers) }
+  given!(:question) { create(:question) }
   given(:other_user) { create(:user) }
 
   context 'Authenticated user' do
@@ -46,8 +46,7 @@ feature 'Delete files to answer', "
       visit question_path(question2)
     end
     scenario 'cannot delete file', js: true do
-      save_and_open_page
-      within '.answers'	 do
+      within '.answers'  do
         within('.attachments') do
           expect(page).to_not have_link I18n.t('answers.form.delete_file')
         end

@@ -7,7 +7,7 @@ feature 'Add files to answer', "
   " do
 
   given(:user) { create(:user) }
-  given!(:question) { create(:question_with_answers) }
+  given!(:question) { create(:question) }
 
   context 'Authenticated user' do
     before do
@@ -16,15 +16,12 @@ feature 'Add files to answer', "
     end
 
     scenario 'user create valid answer with file', js: true do
-
+      within '.new_answer' do
+        fill_in 'answer_body', with: 'answer'
+      end
 
       within all('.nested-fields').first do
         attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
-      end
-      within '.new_answer' do
-      	pry
-      	fill_in 'answer_body', with: 'answer'
-        attach_file('File', File.join(Rails.root, '/spec/spec_helper.rb'))
       end
 
       click_on I18n.t('questions.form.add_file')
@@ -44,18 +41,20 @@ feature 'Add files to answer', "
     end
 
     scenario 'user create invalid answer with file', js: true do
-      fill_in 'answer_body', with: 'answer'
-      within all('.nested-fields').first do
+      fill_in 'answer_body', with: ''
+      within ('.nested-fields') do
         attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
       end
-
-      click_on I18n.t('answers.form.submit')
-
+      within '.new_answer' do
+        click_on I18n.t('answers.form.submit')
+      end
       wait_for_ajax
 
       within '.errors' do
-        expect(page).to have_content (I18n.t('activerecord.attributes.answer.title') +
-                                      ' ' + I18n.t('errors.messages.blank'))
+        within '.answer_errors' do
+          expect(page).to have_content (I18n.t('activerecord.attributes.answer.title') +
+                                        ' ' + I18n.t('errors.messages.blank'))
+        end
       end
     end
   end
