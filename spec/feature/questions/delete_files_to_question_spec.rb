@@ -29,9 +29,10 @@ feature 'Delete files to question', "
       wait_for_ajax
 
       visit question_path(question_attachment.attachable)
-
-      expect(page).to_not have_link I18n.t('questions.form.delete_file')
-      expect(page).to_not have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/rails_helper.rb'
+      within '.question_attachment' do
+        expect(page).to_not have_link I18n.t('questions.form.delete_file')
+        expect(page).to_not have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/rails_helper.rb'
+      end
     end
   end
   context 'Other user' do
@@ -40,7 +41,9 @@ feature 'Delete files to question', "
       visit question_path(question_attachment)
     end
     scenario 'cannot delete file', js: true do
-      expect(page).to_not have_link I18n.t('questions.form.delete_file')
+      within '.question_attachment' do
+        expect(page).to_not have_link I18n.t('questions.form.delete_file')
+      end
     end
   end
 end
