@@ -10,7 +10,7 @@ feature 'Add files to answer', "
   given!(:question) { create(:question) }
 
   context 'Authenticated user' do
-    before do
+    background do
       sign_in(user)
       visit question_path(question)
     end
@@ -34,7 +34,7 @@ feature 'Add files to answer', "
 
       wait_for_ajax
 
-      within('.new_answer') do
+      within('.answers') do
         expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
         expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/2/rails_helper.rb'
       end

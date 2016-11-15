@@ -7,7 +7,7 @@
         - answer.attachments.each do |attach|
            li id="attachment_#{attach.id}"
             = link_to attach.file.identifier, attach.file.url
-            = link_to t('general.destroy'), attach, method: 'delete', remote: true, class: 'litle_link' if user_signed_in? && current_user.author_of?(answer)
+            = link_to I18n.t('attachment.form.delete_attach'), attach, method: 'delete', remote: true, class: 'litle_link' if user_signed_in? && current_user.author_of?(answer)
     .links
       - if user_signed_in?
         - if current_user.author_of?(answer.question)
