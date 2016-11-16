@@ -23,18 +23,21 @@ feature 'Delete files to answer', "
     scenario 'user delete file', js: true do
       expect(page).to have_link I18n.t('answers.form.delete_file')
 
-      within '.question' do
-        expect(page).to have_link 'rails_helper.rb'
+      within '.answers' do
+        expect(page).to have_link 'spec_helper.rb'
         within '.attachments' do
-          click_on I18n.t('answers.form.delete_file')
+          click_on I18n.t('attachment.form.delete_attach')
         end
       end
+
+
       wait_for_ajax
 
       visit question_path(question)
-
-      expect(page).to_not have_link I18n.t('answers.form.delete_file')
-      expect(page).to_not have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/rails_helper.rb'
+      within '.answers' do
+        expect(page).to_not have_link I18n.t('attachment.form.delete_attach')
+        expect(page).to_not have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
+      end
     end
   end
   context 'Other user' do
