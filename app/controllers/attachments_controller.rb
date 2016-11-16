@@ -3,6 +3,6 @@ class AttachmentsController < ApplicationController
 
   def destroy
     @attachment = Attachment.find(params[:id])
-    @attachment.destroy if @attachment && current_user.author_of?(@attachment.attachable)
+    @attachment.destroy if current_user.author_of?(@attachment.attachable)
   end
 end
