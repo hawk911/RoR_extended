@@ -3,6 +3,9 @@ p
 .question
   .question_attachment
     = render 'question_with_attachments'
+  - if user_signed_in?
+    .question_votes
+      = render partial: 'votes/votes', locals: { votable: @question }
   - if user_signed_in? && current_user.author_of?(@question)
       p
         = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|

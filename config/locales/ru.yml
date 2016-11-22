@@ -15,6 +15,13 @@ ru:
       edit_save: 'Изменить ответ'
       add_file: 'Добавить файл'
       delete_file: 'Удалить файл'
+  votes:
+    form:
+      total: 'Всего голосов'
+      like: 'Нравится'
+      dislike: ' Не нравится'
+      change: 'Изменить'
+      cancel: 'Удалить'
   attachment:
     form:
       delete_attach: 'Удалить файл'
