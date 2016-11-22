@@ -1,4 +1,5 @@
 require 'rails_helper'
+require Rails.root.join('spec/models/concerns/votable_spec')
 
 RSpec.describe Question, type: :model do
   context 'validate' do
@@ -29,4 +30,11 @@ RSpec.describe Question, type: :model do
   context 'attachments' do
     it { should accept_nested_attributes_for :attachments }
   end
+
+  context 'length' do
+    it { should validate_length_of(:title).is_at_least(5).is_at_most(100) }
+    it { should validate_length_of(:body).is_at_least(5).is_at_most(1000) }
+  end
+
+  it_behaves_like 'votable'
 end

@@ -1,0 +1,12 @@
+.total-vote
+  p =I18n.t('votes.form.total')
+  = votable.total
+.link-vote
+  ul
+    - if !current_user.voted?(votable)
+      li = link_to I18n.t('votes.form.like'), [:like, votable], method: :post, remote:true
+      li = link_to I18n.t('votes.form.dislike'), [:dislike, votable], method: :post, remote:true
+
+    - if current_user.voted?(votable)
+      li= link_to I18n.t('votes.form.change'), [:change_vote, votable], method: :patch, remote: true
+      li= link_to I18n.t('votes.form.cancel'), [:cancel_vote, votable], method: :delete, remote: true
