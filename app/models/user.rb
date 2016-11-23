@@ -15,7 +15,7 @@ class User < ApplicationRecord
   end
 
   def can_vote?(object)
-    !author_of?(object) && !voted?(object)
+    author_of?(object) && !voted?(object)
   end
 
 end
