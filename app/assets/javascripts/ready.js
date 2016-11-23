@@ -21,7 +21,10 @@ $('body').on('click', '.edit-answer-link', function(e) {
  });
 };
 
+
+
 $(document).ready(ready);
 $(document).on('turbolinks:load', ready);
 $(document).on('page:update', ready);
+
 
