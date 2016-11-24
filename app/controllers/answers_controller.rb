@@ -24,7 +24,7 @@ class AnswersController < ApplicationController
     if current_user.author_of?(@question)
       @answer.toggle_best!
     else
-      flash[:alert] = 'Error'
+      flash[:alert] = t('flash.danger.error')
     end
   end
 
