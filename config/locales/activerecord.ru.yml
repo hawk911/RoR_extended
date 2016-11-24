@@ -35,3 +35,4 @@ ru:
       delete_answer: 'Вы удалили свой ответ'
     danger:
       auth_error: 'Ошибка аудентификации'
+      error: 'Ошибка'
