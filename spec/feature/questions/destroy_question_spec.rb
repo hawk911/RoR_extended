@@ -15,7 +15,6 @@ feature 'Destroy question', '
       visit question_path(question)
     end
     scenario 'valid user destroy question' do
-      # save_and_open_page
       click_on I18n.t('activerecord.attributes.question.delete')
 
       within 'body' do
