@@ -15,8 +15,9 @@ feature 'Destroy question', '
       visit question_path(question)
     end
     scenario 'valid user destroy question' do
-      click_on I18n.t('activerecord.attributes.question.delete')
-
+      within '.question_links' do
+        click_on I18n.t('activerecord.attributes.question.delete')
+      end
       within 'body' do
         expect(page).to_not have_content question.title
         expect(page).to_not have_content question.body
