@@ -11,7 +11,7 @@ module Voted
     if current_user.can_vote?(@votable)
       respond_with(@votable.set_evaluate(current_user, 1), template: 'votes/vote.json.jbuilder')
     else
-      render json: '{"alert": "You cannot vote"}' , status: :unprocessable_entity
+      render json: '{"alert": "Вы не можете голосовать!"}' , status: :unprocessable_entity
     end
   end
 
@@ -19,7 +19,7 @@ module Voted
     if current_user.can_vote?(@votable)
       respond_with(@votable.set_evaluate(current_user, -1), template: 'votes/vote.json.jbuilder')
     else
-      render json: '{"alert": "You cannot vote"}', status: :unprocessable_entity
+      render json: '{"alert": "Вы не можете голосовать!"}', status: :unprocessable_entity
     end
   end
 
@@ -27,7 +27,7 @@ module Voted
     if current_user.author_of?(@votable) && current_user.voted?(@votable)
       respond_with(@votable.change_evaluate(current_user), template: 'votes/vote.json.jbuilder')
     else
-      render json: '{"alert": "You cannot vote"}', status: :unprocessable_entity
+      render json: '{"alert": "Вы не можете голосовать!"}', status: :unprocessable_entity
     end
   end
 
@@ -35,7 +35,7 @@ module Voted
     if current_user.author_of?(@votable) && current_user.voted?(@votable)
       respond_with(@votable.cancel_evaluate(current_user), template: 'votes/vote.json.jbuilder')
     else
-      render json: '{"alert": "You cannot vote"}', status: :unprocessable_entity
+      render json: '{"alert": "Вы не можете голосовать!"}', status: :unprocessable_entity
     end
   end
 

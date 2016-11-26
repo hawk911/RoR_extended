@@ -10,9 +10,9 @@ voting = (e, data, status, xhr) ->
     $('#votable-not-yet-links-' + votable.votable_id).removeClass('hidden')
 
 voting = (e,xhr,status,error)  ->
-  debugger;
   error_object = $.parseJSON(xhr.responseText)
-  $('.errors').append(error_object)
+  $(".errors").empty();
+  $('.errors').append(error_object.alert)
 
 $(document).ready ->
   $(document).on('ajax:success', '.voting', voting)
