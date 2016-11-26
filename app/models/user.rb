@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
 
   def author_of?(object)
     object.user_id == id
@@ -15,7 +15,7 @@ class User < ApplicationRecord
   end
 
   def can_vote?(object)
-    author_of?(object) && !voted?(object)
+    !author_of?(object) && !voted?(object)
   end
 
 end
