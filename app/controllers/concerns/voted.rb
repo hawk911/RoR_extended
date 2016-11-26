@@ -7,11 +7,11 @@ module Voted
     respond_to :json, only: [:like, :dislike, :change_vote, :cancel_vote]
   end
 
-def like
+  def like
     if current_user.can_vote?(@votable)
       respond_with(@votable.set_evaluate(current_user, 1), template: 'votes/vote.json.jbuilder')
     else
-      render json: '{"alert": "You cannot vote"}', status: :unprocessable_entity
+      render json: '{"alert": "You cannot vote"}' , status: :unprocessable_entity
     end
   end
 

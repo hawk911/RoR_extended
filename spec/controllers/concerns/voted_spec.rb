@@ -9,20 +9,21 @@ RSpec.shared_examples 'voted' do |parameter|
   describe 'POST #like' do
     context 'non author' do
       it 'vote count changed by 1' do
-        expect { post :like, id: votable, format: :json }.to change(votable.votes, :count).by(1)
+        binding.pry
+        expect { post :like, params: { id: votable }, format: :json }.to change(votable.votes, :count).by(1)
       end
 
       it 'vote value changed by 1' do
-        post :like, id: votable, format: :json
+        post :like, params: { id: votable }, format: :json
         expect(votable.votes.last.value).to eq 1
       end
     end
 
     context 'try to vote twice' do
-      before { post :like, id: votable, format: :json }
+      before { post :like, params: { id: votable }, format: :json }
 
       it 'does not change total value' do
-        expect { post :like, id: votable, format: :json }.to_not change(Vote, :count)
+        expect { post :like, params: { id: votable }, format: :json }.to_not change(Vote, :count)
       end
 
       it 'total value still 1' do
@@ -30,7 +31,7 @@ RSpec.shared_examples 'voted' do |parameter|
       end
 
       it 'show error message' do
-        post :like, id: votable, format: :json
+        post :like, params: { id: votable }, format: :json
 
         expect(JSON.parse(response.body)['error']).to eq 'You cannot vote'
       end
