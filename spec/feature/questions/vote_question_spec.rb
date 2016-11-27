@@ -16,12 +16,14 @@ feature 'Add vote to question', "
     end
 
     scenario 'like question', js:true do
-      #binding.pry
       click_on I18n.t('votes.form.like')
 
       wait_for_ajax
 
       expect(page).to_not have_link I18n.t('votes.form.like')
+      expect(page).to_not have_link	I18n.t('votes.form.dislike')
+      expect(page).to have_link I18n.t('votes.form.change')
+      expect(page).to have_link I18n.t('votes.form.cancel')
 
     end
 

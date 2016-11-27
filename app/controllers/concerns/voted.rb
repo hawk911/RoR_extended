@@ -24,7 +24,7 @@ module Voted
   end
 
   def change_vote
-    if current_user.author_of?(@votable) && current_user.voted?(@votable)
+    if !current_user.author_of?(@votable) && current_user.voted?(@votable)
       respond_with(@votable.change_evaluate(current_user), template: 'votes/vote.json.jbuilder')
     else
       render json: '{"alert": "Вы не можете голосовать!"}', status: :unprocessable_entity
@@ -32,7 +32,7 @@ module Voted
   end
 
   def cancel_vote
-    if current_user.author_of?(@votable) && current_user.voted?(@votable)
+    if !current_user.author_of?(@votable) && current_user.voted?(@votable)
       respond_with(@votable.cancel_evaluate(current_user), template: 'votes/vote.json.jbuilder')
     else
       render json: '{"alert": "Вы не можете голосовать!"}', status: :unprocessable_entity
