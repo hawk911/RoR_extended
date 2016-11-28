@@ -1,4 +1,5 @@
 require 'rails_helper'
+require Rails.root.join('spec/models/concerns/votable_spec')
 
 RSpec.describe Answer, type: :model do
   context 'validate' do
@@ -41,4 +42,7 @@ RSpec.describe Answer, type: :model do
       expect { answer_best.toggle_best! }.to change { answer_best.best }.from(true).to(false)
     end
   end
+
+  it_behaves_like 'votable'
+
 end

@@ -1,23 +1,25 @@
 require_relative '../feature_helper'
 
-feature 'Add vote to question', "
+feature 'Add vote to answer', "
   As an authenticated user
-  I'd like to be able to vote for question
+  I'd like to be able to vote for answer
   For range
   " do
   given(:user) { create(:user) }
   given(:other_user) { create(:user) }
+  given(:answer_user) { create(:user) }
 
   context 'Authenticated user' do
-    given(:question) { create(:question, user: other_user)}
+    given(:question) { create(:question, user: other_user) }
+    given!(:answer) { create(:answer, user: answer_user, question: question) }
     background do
       sign_in(user)
       visit question_path(question)
     end
 
-    scenario 'like question', js:true do
-      within '.question_votes' do
-
+    scenario 'like answer', js:true do
+      pry
+      within '.answer_votes' do
         click_on I18n.t('votes.form.like')
 
         wait_for_ajax
@@ -31,9 +33,8 @@ feature 'Add vote to question', "
       end
     end
 
-    scenario 'dislike question', js:true do
-      within '.question_votes' do
-
+    scenario 'dislike answer', js:true do
+      within '.answer_votes' do
         click_on I18n.t('votes.form.dislike')
 
         wait_for_ajax
@@ -47,9 +48,8 @@ feature 'Add vote to question', "
       end
     end
 
-    scenario 'change question', js:true do
-      within '.question_votes' do
-
+    scenario 'change answer', js:true do
+      within '.answer_votes' do
         click_on I18n.t('votes.form.like')
         click_on I18n.t('votes.form.change')
 
@@ -64,9 +64,8 @@ feature 'Add vote to question', "
       end
     end
 
-    scenario 'cancel question', js:true do
-      within '.question_votes' do
-
+    scenario 'cancel answer', js:true do
+      within '.answer_votes' do
         click_on I18n.t('votes.form.like')
         click_on I18n.t('votes.form.cancel')
 

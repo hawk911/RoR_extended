@@ -9,7 +9,6 @@ RSpec.shared_examples 'voted' do |parameter|
   describe 'POST #like' do
     context 'non author' do
       it 'vote count changed by 1' do
-        binding.pry
         expect { post :like, params: { id: votable }, format: :json }.to change(votable.votes, :count).by(1)
       end
 
@@ -33,7 +32,7 @@ RSpec.shared_examples 'voted' do |parameter|
       it 'show error message' do
         post :like, params: { id: votable }, format: :json
 
-        expect(JSON.parse(response.body)['error']).to eq 'You cannot vote'
+        expect(JSON.parse(response.body)['errors']).to eq 'Вы не можете голосовать!'
       end
     end
   end

@@ -10,6 +10,8 @@
             = link_to I18n.t('attachment.form.delete_attach'), attach, method: 'delete', remote: true, class: 'litle_link' if user_signed_in? && current_user.author_of?(answer)
     .links
       - if user_signed_in?
+        .answer_votes
+          = render partial: 'votes/votes', locals: { votable: answer }
         - if current_user.author_of?(answer.question)
           = link_to (answer.best? ? 'Revert' : 'Best answer'),set_best_answer_path(answer),class: 'select-best-answer', remote:true, method: :patch
         - if current_user.author_of?(answer)
