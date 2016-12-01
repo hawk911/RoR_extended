@@ -1,6 +1,6 @@
-question_voting = (e, data, status, xhr) ->
+answer_voting = (e, data, status, xhr) ->
   votable = $.parseJSON(xhr.responseText)
-  $('.'+ votable.votable_type+'_votes#votable-total-' + votable.votable_id).html( votable.total )
+  $('.'+ votable.votable_type+'-votable-total-' + votable.votable_id).html( votable.total )
   if votable.user_voted
     $('.'+ votable.votable_type+'_votes#votable-already-links-' + votable.votable_id).removeClass('hidden')
     $('.'+ votable.votable_type+'_votes#votable-not-yet-links-' + votable.votable_id).addClass('hidden')
@@ -13,5 +13,5 @@ error_voting = (e,xhr,status,error)  ->
   $('.errors').append(error_object.alert)
 
 $(document).ready ->
-  $(document).on('ajax:success', '.answer_votes', question_voting)
+  $(document).on('ajax:success', '.answer_votes', answer_voting)
   $(document).on('ajax:error', '.answer_votes', error_voting)
