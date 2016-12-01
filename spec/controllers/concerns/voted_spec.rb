@@ -31,8 +31,7 @@ RSpec.shared_examples 'voted' do |parameter|
 
       it 'show error message' do
         post :like, params: { id: votable }, format: :json
-
-        expect(JSON.parse(response.body)['errors']).to eq 'Вы не можете голосовать!'
+        expect(JSON.parse(response.body)['alert']).to eq 'Вы не можете голосовать!'
       end
     end
   end
