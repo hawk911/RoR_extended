@@ -1,5 +1,5 @@
-.voting
-	.votable-total id="votable-total-#{votable.id}"
+
+	.votable-total id="#{votable.class.to_s.downcase}-votable-total-#{votable.id}"
 	  p =I18n.t('votes.form.total')
 	  = votable.total
 	.link-vote

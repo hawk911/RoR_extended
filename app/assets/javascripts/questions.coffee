@@ -1,4 +1,4 @@
-answer_voting = (e, data, status, xhr) ->
+question_voting = (e, data, status, xhr) ->
   votable = $.parseJSON(xhr.responseText)
   $('#votable-total-' + votable.votable_id).html( votable.total )
   if votable.user_voted
@@ -13,5 +13,5 @@ error_voting = (e,xhr,status,error)  ->
   $('.errors').append(error_object.alert)
 
 $(document).ready ->
-  $(document).on('ajax:success', '.question_votes', answer_voting)
+  $(document).on('ajax:success', '.question_votes', question_voting)
   $(document).on('ajax:error', '.question_votes', error_voting)
