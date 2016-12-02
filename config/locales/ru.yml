@@ -19,7 +19,7 @@ ru:
     form:
       total: 'Всего голосов'
       like: 'Нравится'
-      dislike: ' Не нравится'
+      dislike: 'Не нравится'
       change: 'Изменить'
       cancel: 'Удалить'
   attachment:
