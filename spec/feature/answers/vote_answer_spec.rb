@@ -18,8 +18,6 @@ feature 'Add vote to answer', "
     end
 
     scenario 'like answer', js:true do
-      #binding.pry
-      pry
       within '.answer_votes' do
         click_on I18n.t('votes.form.like')
 
