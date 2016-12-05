@@ -15,3 +15,9 @@ error_voting = (e,xhr,status,error)  ->
 $(document).ready ->
   $(document).on('ajax:success', '.question_votes', question_voting)
   $(document).on('ajax:error', '.question_votes', error_voting)
+
+App.cable.subscriptions.create('QuestionsChannel', {
+  connected: ->
+    conscole.log 'Connected!'
+    @perform 'do_somethink', text: 'Hello'
+})
