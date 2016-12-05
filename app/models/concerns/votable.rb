@@ -10,15 +10,15 @@ module Votable
   end
 
   def total
-  	votes.sum(:value)
+    votes.sum(:value)
   end
 
   def change_evaluate(user)
-  	votes.where(user: user).update_all('value = (-1) * value')
-  	votes.reload
+    votes.where(user: user).update_all('value = (-1) * value')
+    votes.reload
   end
 
   def cancel_evaluate(user)
-  	votes.where(user: user).delete_all
+    votes.where(user: user).delete_all
   end
 end
