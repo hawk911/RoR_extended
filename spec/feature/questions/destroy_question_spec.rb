@@ -7,7 +7,6 @@ feature 'Destroy question', '
   given(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
   given(:user_question_path) { questions_path(question) }
-  given!(:other_question) { create(:question) }
 
   context 'Authenticated user' do
     before do
@@ -15,9 +14,9 @@ feature 'Destroy question', '
       visit question_path(question)
     end
     scenario 'valid user destroy question' do
-      # save_and_open_page
-      click_on I18n.t('activerecord.attributes.question.delete')
-
+      within '.question_links' do
+        click_on I18n.t('activerecord.attributes.question.delete')
+      end
       within 'body' do
         expect(page).to_not have_content question.title
         expect(page).to_not have_content question.body

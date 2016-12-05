@@ -1,0 +1,13 @@
+
+	.votable-total id="#{votable.class.to_s.downcase}-votable-total-#{votable.id}"
+	  p =I18n.t('votes.form.total')
+	  = votable.total
+	.link-vote
+
+      ul id="#{votable.class.to_s.downcase}-votable-already-links-#{votable.id}" class=(current_user.voted?(votable) ? '' : 'hidden')
+        li= link_to I18n.t('votes.form.change'), [:change_vote, votable], method: :patch, remote: true
+        li= link_to I18n.t('votes.form.cancel'), [:cancel_vote, votable], method: :delete, remote: true
+
+      ul id="#{votable.class.to_s.downcase}-votable-not-yet-links-#{votable.id}" class=(current_user.voted?(votable) ? 'hidden' : '')
+        li= link_to I18n.t('votes.form.like'), [:like, votable], method: :post, remote: true
+        li= link_to I18n.t('votes.form.dislike'), [:dislike, votable], method: :post, remote: true

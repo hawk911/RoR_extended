@@ -3,14 +3,18 @@ p
 .question
   .question_attachment
     = render 'question_with_attachments'
+  - if user_signed_in?
+    .question_votes
+      = render partial: 'votes/votes', locals: { votable: @question }
   - if user_signed_in? && current_user.author_of?(@question)
       p
         = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
           = f.label :body, I18n.t('activerecord.models.question')
           = f.text_area :body
           = f.submit I18n.t('questions.form.edit_save')
-      = link_to I18n.t('questions.form.edit'), '', class: 'edit-question-link', data: { question_id: @question.id }
-      = link_to I18n.t('activerecord.attributes.question.delete'), question_path(@question), method: :delete
+      .question_links
+        = link_to I18n.t('questions.form.edit'), '', class: 'edit-question-link', data: { question_id: @question.id }
+        = link_to I18n.t('activerecord.attributes.question.delete'), question_path(@question), method: :delete
   p
 .answers
   = render @question.answers

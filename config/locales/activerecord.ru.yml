@@ -27,6 +27,8 @@ ru:
       invalid: "не правильный"
       empty: "не может быть пустым/не существует"
       taken: "уже существует"
+      cannotvote: "Вы не можете голосовать"
+
   flash:
     success:
       new_question: 'Вы создали вопрос'
@@ -34,3 +36,4 @@ ru:
       delete_answer: 'Вы удалили свой ответ'
     danger:
       auth_error: 'Ошибка аудентификации'
+      error: 'Ошибка'

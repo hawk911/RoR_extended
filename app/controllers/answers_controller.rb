@@ -4,6 +4,8 @@ class AnswersController < ApplicationController
   before_action :load_answer, only: [:destroy, :update, :set_best]
   before_action :check_owner, only: [:destroy, :update]
 
+  include Voted
+
   def create
     @answer = @question.answers.create(answer_params)
     @answer.user = current_user
@@ -24,7 +26,7 @@ class AnswersController < ApplicationController
     if current_user.author_of?(@question)
       @answer.toggle_best!
     else
-      flash[:alert] = 'Error'
+      flash[:alert] = t('flash.danger.error')
     end
   end
 
