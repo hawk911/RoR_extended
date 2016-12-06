@@ -18,6 +18,9 @@ $(document).ready ->
 
 App.cable.subscriptions.create('QuestionsChannel', {
   connected: ->
-    conscole.log 'Connected!'
+    console.log 'Connected!'
     @perform 'do_somethink', text: 'Hello'
+    ,
+  received: (data) ->
+    console.log 'received', data
 })
