@@ -43,6 +43,8 @@ gem 'carrierwave'
 gem 'remotipart'
 # Unobtrusive nested forms handling, using jQuery.
 gem 'cocoon'
+# Get your Rails variables in your js
+gem 'gon'
 
 # test
 group :development, :test do
