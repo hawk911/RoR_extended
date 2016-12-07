@@ -45,7 +45,8 @@ gem 'remotipart'
 gem 'cocoon'
 # Get your Rails variables in your js
 gem 'gon'
-
+# Client-side templates
+gem 'skim'
 # test
 group :development, :test do
   gem 'rspec-rails'
