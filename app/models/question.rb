@@ -11,5 +11,17 @@ class Question < ApplicationRecord
   validates :body, length: {in: 5..1000}
 
   accepts_nested_attributes_for :attachments, reject_if: :all_blank, allow_destroy: true
+  after_create :post_via_question
   scope :ordered, -> { order(created_at: :desc) }
+
+  private
+
+  def post_via_question
+    ActionCable.server.broadcast '/questions',
+    ApplicationController.render(
+      partial: 'questions/question',
+      locals: { question: self }
+    )
+  end
+
 end
