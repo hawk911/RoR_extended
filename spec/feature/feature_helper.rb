@@ -4,6 +4,8 @@ RSpec.configure do |config|
   Capybara.javascript_driver = :webkit
   #ignore hidden elements
   Capybara.ignore_hidden_elements = true
+
+  Capybara.server = :puma
   # feature_macros
   config.include FeatureMacros, type: :feature
 
