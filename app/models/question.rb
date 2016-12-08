@@ -17,9 +17,9 @@ class Question < ApplicationRecord
   private
 
   def post_via_question
-    ActionCable.server.broadcast '/questions',
+  	ActionCable.server.broadcast '/questions',
     ApplicationController.render(
-      partial: 'questions/question',
+      partial: 'questions/new_question',
       locals: { question: self }
     )
   end
