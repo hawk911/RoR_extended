@@ -32,6 +32,36 @@ feature 'Create Question', '
     end
   end
 
+  context 'multiple sessions' do
+    scenario "questions appears on another user's page" do
+      pry
+      Capybara.using_session("user_test") do
+        sign_in(user)
+        visit questions_path
+      end
+
+      Capybara.using_session("guest") do
+        visit questions_path
+      end
+
+      Capybara.using_session("user_test") do
+        click_on I18n.t('questions.index.ask')
+        fill_in I18n.t('activerecord.attributes.question.title'), with: 'Test question'
+        fill_in I18n.t('activerecord.attributes.question.body'), with: 'Body question'
+        click_on I18n.t('questions.form.submit')
+
+        within '.question' do
+          expect(page).to have_content 'Test question'
+          expect(page).to have_content 'Body question'
+        end
+      end
+
+      Capybara.using_session("guest") do
+        expect(page).to have_content 'Test question'
+      end
+    end
+  end
+
   context 'Authenticated user invalid question' do
     before do
       sign_in(user)
