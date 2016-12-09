@@ -1,0 +1,2 @@
+hr
+.answer id="answer-#{@answer.id}"
