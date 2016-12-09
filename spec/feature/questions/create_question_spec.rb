@@ -33,9 +33,9 @@ feature 'Create Question', '
   end
 
   context 'multiple sessions' do
-    scenario "questions appears on another user's page" do
-      pry
-      Capybara.using_session("user_test") do
+    scenario "questions appears on another user's page", js:true do
+
+      Capybara.using_session("user") do
         sign_in(user)
         visit questions_path
       end
@@ -44,7 +44,7 @@ feature 'Create Question', '
         visit questions_path
       end
 
-      Capybara.using_session("user_test") do
+      Capybara.using_session("user") do
         click_on I18n.t('questions.index.ask')
         fill_in I18n.t('activerecord.attributes.question.title'), with: 'Test question'
         fill_in I18n.t('activerecord.attributes.question.body'), with: 'Body question'
@@ -57,7 +57,9 @@ feature 'Create Question', '
       end
 
       Capybara.using_session("guest") do
-        expect(page).to have_content 'Test question'
+        within '.questions' do
+          expect(page).to have_content 'Test question'
+        end
       end
     end
   end
