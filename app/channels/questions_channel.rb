@@ -3,10 +3,10 @@ class QuestionsChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    Rails.logger.info "You are disconnected"
+    #Rails.logger.info "You are disconnected"
   end
 
-  def start_stream
+  def start_stream_questions
     stream_from '/questions'
   end
 

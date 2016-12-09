@@ -10,6 +10,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    gon.current_user_id = current_user ? current_user.id : 0
     @answer = @question.answers.build
     @answer.attachments.build
   end
