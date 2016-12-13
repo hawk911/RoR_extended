@@ -1,6 +1,6 @@
 .errors
 p
-.question
+.question id="question_#{@question.id}"
   .question_attachment
     = render 'question_with_attachments'
   - if user_signed_in?
