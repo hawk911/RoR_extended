@@ -6,7 +6,7 @@ class AnswersChannel < ApplicationCable::Channel
   end
 
   def start_stream_answers(data)
-    stream_from "/question/#{params[:question]}/answers"
+    stream_from "/question/#{data['question_id']}/answers"
   end
 
 end
