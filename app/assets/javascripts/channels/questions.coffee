@@ -7,5 +7,6 @@ App.questions = App.cable.subscriptions.create "QuestionsChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
+    console.log("QuestionChannel begin")
     $(".errors").empty();
     $('.questions').last('.questions').append(data)
