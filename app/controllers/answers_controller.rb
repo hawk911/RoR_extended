@@ -64,7 +64,7 @@ class AnswersController < ApplicationController
     end
 
     ActionCable.server.broadcast(
-      "/question/#{@answer.question_id}/answers",
+      "answers_#{@question.id}",
       answer:             @answer,
       answer_attachments: attachments,
       answer_votes:      @answer.votes,
