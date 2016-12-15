@@ -8,7 +8,6 @@ App.answers = App.cable.subscriptions.create channel: "AnswersChannel" ,
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    debugger
     console.log("AnswersChannel begin")
     console.log(data['answer'])
 
