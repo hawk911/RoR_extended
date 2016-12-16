@@ -3,7 +3,6 @@ class AnswersController < ApplicationController
   before_action :load_question, only: [:create]
   before_action :load_answer, only: [:destroy, :update, :set_best]
   before_action :check_owner, only: [:destroy, :update]
-  after_action :publish_answer, only: [:create]
 
   include Voted
 
@@ -51,24 +50,5 @@ class AnswersController < ApplicationController
     end
   end
 
-  def publish_answer
-    return if @answer.errors.any?
 
-    attachments = []
-    @answer.attachments.each do |a|
-      attach = {}
-      attach[:id] = a.id
-      attach[:file_url] = a.file.url
-      attach[:file_name] = a.file.identifier
-      attachments << attach
-    end
-
-    ActionCable.server.broadcast(
-      "answers_question_#{@question.id}",
-      answer:             @answer,
-      answer_attachments: attachments,
-      answer_votes:      @answer.votes,
-      question_user_id:   @answer.question.user_id
-    )
-  end
 end
