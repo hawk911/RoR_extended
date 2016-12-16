@@ -6,7 +6,7 @@ class Answer < ApplicationRecord
   belongs_to :user
 
   validates :body, :question_id, :user_id, presence: true
-
+  after_create :actioncable_answer
   accepts_nested_attributes_for :attachments, reject_if: proc { |a| a[:file].blank? }, allow_destroy: true
 
   default_scope { order(best: :desc, created_at: :asc) }
@@ -19,18 +19,24 @@ class Answer < ApplicationRecord
     end
   end
 
-  #def broadcast
-  #  return if errors.any?
-  #
-  #   files = []
-  #  attachments.each { |a| files << { id: a.id, file_url: a.file.url, file_name: a.file.identifier } }
-  #
-  #   ActionCable.server.broadcast(
-  #    "answers_#{question_id}",
-  #   answer:             self,
-  #  answer_attachments: files,
-  # answer_voting:      votes,
-  #question_user_id:   question.user_id
-  #)
-  #end
+  def actioncable_answer
+    return if errors.any?
+
+    attachments = []
+      attachments.each do |a|
+      attach = {}
+      attach[:id] = a.id
+      attach[:file_url] = a.file.url
+      attach[:file_name] = a.file.identifier
+      attachments << attach
+    end
+
+    ActionCable.server.broadcast(
+      "answers_question_#{question.id}",
+      answer:             self,
+      answer_attachments: attachments,
+      answer_votes:       votes,
+      question_user_id:   question.user_id
+    )
+  end
 end
