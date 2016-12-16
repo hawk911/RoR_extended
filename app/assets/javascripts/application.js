@@ -12,9 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require cable
 //= require jquery.remotipart
 //= require skim
-//= require cable
 //= require turbolinks
 //= require cocoon
 //= require_tree
+//= require ./templates/answer
