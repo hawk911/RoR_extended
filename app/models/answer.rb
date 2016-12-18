@@ -1,5 +1,6 @@
 class Answer < ApplicationRecord
   include Votable
+  include Commentable
 
   has_many :attachments, as: :attachable, dependent: :destroy
   belongs_to :question
@@ -18,6 +19,8 @@ class Answer < ApplicationRecord
       update!(best: !best?)
     end
   end
+
+  private
 
   def actioncable_answer
     return if errors.any?
