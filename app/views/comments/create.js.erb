@@ -1,0 +1,9 @@
+$(".errors").empty();
+$(".alert").remove();
+debugger;
+comments_selector = "#comments-<%=@comment.commentable_type.underscore%>-<%=@comment.commentable_id%>"
+<% if @object.errors.present? %>
+  $('.errors').append('<%= j render "common/errors", resourse: @object %>').appendTo(".errors");
+<% else %>
+  $('.answers').append("<%= j render @object %>");
+$('textarea#answer_body').val('');
