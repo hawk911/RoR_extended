@@ -13,16 +13,16 @@ Rails.application.routes.draw do
   end
 
   concern :commentable do
-    resources :comments, shallow: true, only: :create
+    resources :comments, only: :create
   end
 
-  resources :questions, concerns: :votable do
-    resources :answers, only: [:new, :create, :update, :destroy], concerns: :votable, shallow: true do
+  resources :questions, concerns: [:votable,:commentable] do
+    resources :answers, only: [:new, :create, :update, :destroy], concerns: [:votable, :commentable], shallow: true do
       patch :set_best, on: :member
     end
   end
 
   resources :attachments, only: [:destroy]
 
-mount ActionCable.server => '/cable'
+  mount ActionCable.server => '/cable'
 end

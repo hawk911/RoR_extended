@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_commentable
+  before_action :load_commentable, only: :create
 
   def create
     @comment = @commentable.comments.create(comment_params.merge(user: current_user))
@@ -13,8 +13,9 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body)
   end
 
-  def load_votable
-    @commentable = controller_name.classify.constantize.find(params[:id])
+  def load_commentable
+    klass = [Question, Answer].detect{|c| params["#{c.name.underscore}_id"]}
+    @commentable = klass.find(params["#{klass.name.underscore}_id"])
   end
 
 end
