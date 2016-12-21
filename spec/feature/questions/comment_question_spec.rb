@@ -14,8 +14,10 @@ I want add comment for question" do
     scenario 'add comment', js:true do
       within '.question_comment' do
         fill_in I18n.t('activerecord.attributes.comment.body'), with: 'Body comment'
+        click_on 'Add comment'
 
         wait_for_ajax
+        pry
 
         within '.question_comment' do
           expect(page).to have_content 'Body comment'

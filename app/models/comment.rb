@@ -7,7 +7,7 @@ class Comment < ApplicationRecord
 
   def actioncable_commentable
     return if errors.any?
-    binding.pry
+    #binding.pry
     commentable_id = (commentable_type == 'Question') ? commentable_id : commentable.question_id
 
     ActionCable.server.broadcast(
