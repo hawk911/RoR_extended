@@ -16,6 +16,8 @@ ru:
       user:
         password: 'Пароль'
         password_confirmation: 'Подтвердите пароль'
+      comment:
+        body: 'Комментарий'
   errors:
     models:
       answer:
