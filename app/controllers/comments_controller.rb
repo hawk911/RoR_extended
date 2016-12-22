@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.create(comment_params.merge(user: current_user))
-    respond_with @comment
   end
 
   private

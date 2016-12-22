@@ -1,8 +1,13 @@
 -if answer.persisted?
   div id="answer_#{answer.id}"
     p = answer.body
+    - if user_signed_in?
+      .answer_comments id="answer_#{answer.id}"
+        = render partial: 'comments/form', locals: { commentable: answer }
+    -if @answer.comments.any?
+      = render @answer.comments
     - if answer.attachments.exists?
-    .attachments
+      .attachments
        ul
         - answer.attachments.each do |attach|
            li id="attachment_#{attach.id}"
