@@ -12,19 +12,14 @@ I want add comment for question" do
       visit question_path(question)
     end
     scenario 'add comment', js:true do
-      within '.question_comment' do
+      within '.question_comments' do
         fill_in I18n.t('activerecord.attributes.comment.body'), with: 'Body comment'
         click_on 'Add comment'
 
         wait_for_ajax
-        pry
 
-        within '.question_comment' do
-          expect(page).to have_content 'Body comment'
-        end
+        expect(page).to have_content 'Body comment'
       end
     end
-
   end
-
 end
