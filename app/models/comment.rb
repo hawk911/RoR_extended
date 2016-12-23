@@ -7,22 +7,32 @@ class Comment < ApplicationRecord
 
   def actioncable_commentable
     return if errors.any?
-    #binding.pry
-    commentable_id = (commentable_type == 'Question') ? commentable_id : commentable.question_id
 
-    ActionCable.server.broadcast(
-      "comments_#{commentable_type}_#{commentable_id}",
-      commentable_id:   commentable_id,
-      commentable_type: commentable_type.underscore,
-      comment:          self
-    )
-
-    #ActionCable.server.broadcast "answers_question_#{question.id}",
-    #ApplicationController.render(
-    #  partial: 'comments/comment',
-    #  locals: { comment: self }
+    #ActionCable.server.broadcast(
+    #  "comments_#{commentable_type}_#{commentable_id}",
+    #  commentable_id:   commentable_id,
+    #  commentable_type: commentable_type.underscore,
+    #  comment:          self
     #)
+
+    ActionCable.server.broadcast channel_path(self),
+    ApplicationController.render(
+      partial: 'comments/comment',
+      locals: { comment: self }
+    )
   end
 
+  private
+
+  def channel_path(comment)
+    @to_actioncable = "/question/#{commentable_id}"
+    commentable_type == "Question" ? @path = @to_actioncable : @path = @to_actioncable + '/answers'
+    @path += "/comments"
+    #binding.pry
+  end
+
+  #def object_id_for_actioncable
+  #  commentable_id = (commentable_type == 'Question') ? commentable_id : commentable.question_id
+  #end
 
 end
