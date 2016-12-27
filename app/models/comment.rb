@@ -25,8 +25,9 @@ class Comment < ApplicationRecord
   private
 
   def channel_path(comment)
-    @to_actioncable = "/question/#{commentable_id}"
+    @to_actioncable = "/question/question_#{commentable_id}"
     commentable_type == "Question" ? @path = @to_actioncable : @path = @to_actioncable + '/answers'
+    #commentable_type == "Question" ? @path = "/question/question_#{commentable_id}" : @path = "/question/answer_#{commentable_id}/answers"
     @path += "/comments"
     #binding.pry
   end
