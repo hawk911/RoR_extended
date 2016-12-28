@@ -6,8 +6,9 @@ p
   - if user_signed_in?
     .question_votes
       = render partial: 'votes/votes', locals: { votable: @question }
-    .question_comments id="question_#{@question.id}"
-      = render partial: 'comments/form', locals: { commentable: @question }
+    .question_comments
+      div id="add-comment-to-question-#{@question.id}"
+        = render partial: 'comments/form', locals: { commentable: @question }
   -if @question.comments.any?
     = render @question.comments
 

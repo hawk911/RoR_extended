@@ -1,6 +1,7 @@
 $(".errors").empty();
 $(".alert").remove();
-comments_selector = ".<%=@comment.commentable_type.underscore%>_comments"
+
+comments_selector = "#add-comment-to-<%= @comment.commentable_type.underscore %>-<%= @comment.commentable_id %>"
 <% if @comment.errors.present? %>
   $('.errors').append('<%= j render "common/errors", resourse: @comment %>').appendTo(".errors");
 <% else %>
