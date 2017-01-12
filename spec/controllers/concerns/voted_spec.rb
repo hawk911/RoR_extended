@@ -35,5 +35,4 @@ RSpec.shared_examples 'voted' do |parameter|
       end
     end
   end
-
 end

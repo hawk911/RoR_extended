@@ -4,6 +4,6 @@ class CommentsChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    #Rails.logger.info "You are disconnected"
+    # Rails.logger.info "You are disconnected"
   end
 end

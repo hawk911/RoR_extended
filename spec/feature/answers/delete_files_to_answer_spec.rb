@@ -30,7 +30,6 @@ feature 'Delete files to answer', "
         end
       end
 
-
       wait_for_ajax
 
       visit question_path(question)
@@ -49,7 +48,7 @@ feature 'Delete files to answer', "
       visit question_path(question2)
     end
     scenario 'cannot delete file', js: true do
-      within '.answers'  do
+      within '.answers' do
         within('.attachments') do
           expect(page).to_not have_link I18n.t('answers.form.delete_file')
         end

@@ -8,8 +8,8 @@ class Question < ApplicationRecord
 
   validates :title, :body, :user_id, presence: true
 
-  validates :title, length: {in: 5..100}
-  validates :body, length: {in: 5..1000}
+  validates :title, length: { in: 5..100 }
+  validates :body, length: { in: 5..1000 }
 
   accepts_nested_attributes_for :attachments, reject_if: :all_blank, allow_destroy: true
   after_create :actioncable_question
@@ -18,11 +18,10 @@ class Question < ApplicationRecord
   private
 
   def actioncable_question
-  	ActionCable.server.broadcast '/questions',
-    ApplicationController.render(
-      partial: 'questions/new_question',
-      locals: { question: self }
-    )
+    ActionCable.server.broadcast '/questions',
+                                 ApplicationController.render(
+                                   partial: 'questions/new_question',
+                                   locals: { question: self }
+                                 )
   end
-
 end
