@@ -49,6 +49,4 @@ class AnswersController < ApplicationController
       redirect_to @answer.question, notice: t('flash.danger.auth_error')
     end
   end
-
-
 end

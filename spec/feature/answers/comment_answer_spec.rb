@@ -12,7 +12,7 @@ I want add comment for answer" do
       sign_in(user)
       visit question_path(question)
     end
-    scenario 'add comment', js:true do
+    scenario 'add comment', js: true do
       within '.answers' do
         within all('.answer_comments').first do
           fill_in I18n.t('activerecord.attributes.comment.body'), with: 'Body comment first'

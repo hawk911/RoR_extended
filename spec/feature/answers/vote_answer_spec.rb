@@ -17,7 +17,7 @@ feature 'Add vote to answer', "
       visit question_path(question)
     end
 
-    scenario 'like answer', js:true do
+    scenario 'like answer', js: true do
       within '.answer_votes' do
         click_on I18n.t('votes.form.like')
 
@@ -32,7 +32,7 @@ feature 'Add vote to answer', "
       end
     end
 
-    scenario 'dislike answer', js:true do
+    scenario 'dislike answer', js: true do
       within '.answer_votes' do
         click_on I18n.t('votes.form.dislike')
 
@@ -47,7 +47,7 @@ feature 'Add vote to answer', "
       end
     end
 
-    scenario 'change answer', js:true do
+    scenario 'change answer', js: true do
       within '.answer_votes' do
         click_on I18n.t('votes.form.like')
         click_on I18n.t('votes.form.change')
@@ -63,7 +63,7 @@ feature 'Add vote to answer', "
       end
     end
 
-    scenario 'cancel answer', js:true do
+    scenario 'cancel answer', js: true do
       within '.answer_votes' do
         click_on I18n.t('votes.form.like')
         click_on I18n.t('votes.form.cancel')
@@ -78,6 +78,5 @@ feature 'Add vote to answer', "
         within('.votable-total') { expect(page).to have_content('0') }
       end
     end
-
   end
 end

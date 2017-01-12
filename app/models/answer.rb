@@ -26,7 +26,7 @@ class Answer < ApplicationRecord
     return if errors.any?
 
     attachments = []
-      attachments.each do |a|
+    attachments.each do |a|
       attach = {}
       attach[:id] = a.id
       attach[:file_url] = a.file.url

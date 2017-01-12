@@ -13,7 +13,7 @@ RSpec.describe AttachmentsController, type: :controller do
       end
 
       it 'destroy file' do
-        expect {delete :destroy, format: :js, params: { id: file.id } }.to change(Attachment, :count).by(-1)
+        expect { delete :destroy, format: :js, params: { id: file.id } }.to change(Attachment, :count).by(-1)
       end
     end
 
@@ -21,7 +21,7 @@ RSpec.describe AttachmentsController, type: :controller do
       sign_in_user
 
       it 'not destroy file' do
-        expect {delete :destroy, format: :js, params: { id: file.id } }.to_not change(Attachment, :count)
+        expect { delete :destroy, format: :js, params: { id: file.id } }.to_not change(Attachment, :count)
       end
     end
   end

@@ -47,5 +47,4 @@ RSpec.shared_examples 'votable' do
       expect { votable.cancel_evaluate(user) }.to change(votable.votes, :count).by(-1)
     end
   end
-
 end

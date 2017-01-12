@@ -4,7 +4,7 @@ class CreateVotes < ActiveRecord::Migration[5.0]
       t.integer :value
       t.integer :votable_id
       t.string :votable_type
-      t.references :user, index: true, foreign_key:true
+      t.references :user, index: true, foreign_key: true
       t.timestamps
     end
 

@@ -9,15 +9,14 @@ feature 'Add vote to question', "
   given(:other_user) { create(:user) }
 
   context 'Authenticated user' do
-    given(:question) { create(:question, user: other_user)}
+    given(:question) { create(:question, user: other_user) }
     background do
       sign_in(user)
       visit question_path(question)
     end
 
-    scenario 'like question', js:true do
+    scenario 'like question', js: true do
       within '.question_votes' do
-
         click_on I18n.t('votes.form.like')
 
         wait_for_ajax
@@ -31,9 +30,8 @@ feature 'Add vote to question', "
       end
     end
 
-    scenario 'dislike question', js:true do
+    scenario 'dislike question', js: true do
       within '.question_votes' do
-
         click_on I18n.t('votes.form.dislike')
 
         wait_for_ajax
@@ -47,9 +45,8 @@ feature 'Add vote to question', "
       end
     end
 
-    scenario 'change question', js:true do
+    scenario 'change question', js: true do
       within '.question_votes' do
-
         click_on I18n.t('votes.form.like')
         click_on I18n.t('votes.form.change')
 
@@ -64,9 +61,8 @@ feature 'Add vote to question', "
       end
     end
 
-    scenario 'cancel question', js:true do
+    scenario 'cancel question', js: true do
       within '.question_votes' do
-
         click_on I18n.t('votes.form.like')
         click_on I18n.t('votes.form.cancel')
 
@@ -80,6 +76,5 @@ feature 'Add vote to question', "
         within('.votable-total') { expect(page).to have_content('0') }
       end
     end
-
   end
 end
