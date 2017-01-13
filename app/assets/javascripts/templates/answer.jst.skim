@@ -1,2 +1,8 @@
 hr
 .answer id="answer-#{@answer.id}"
+  p = @answer.body
+  - if defined?(@answer_attachments)
+   .attachments
+      - for attach in @answer_attachments
+          id="attachment_#{attach.id}"
+          = link_to attach.file.identifier, attach.file.url
