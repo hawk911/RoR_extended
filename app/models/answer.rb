@@ -39,7 +39,6 @@ class Answer < ApplicationRecord
       answer:             self,
       answer_attachments: attachments,
       answer_votes:       votes,
-      question_user_id:   question.user_id
     )
   end
 end
