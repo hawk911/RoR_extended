@@ -25,6 +25,9 @@ ru:
   attachment:
     form:
       delete_attach: 'Удалить файл'
+  comments:
+      form:
+        submit: 'Добавить комментарий'
   layouts:
     application:
       hello: 'Добро пожаловать'

@@ -1,8 +1,20 @@
 hr
 .answer id="answer-#{@answer.id}"
   p = @answer.body
-  - if defined?(@answer_attachments)
+  .answer_comments
+    div id="add-comment-to-answer-#{@answer.id}"
+      form.new_comment id="new_comment" action="/answers/#{@answer.id}/comments" accept-charset="UTF-8" data-remote="true" method="post"
+        input name="utf8" type="hidden" value="✓"
+        p
+          label for="comment_body" Комментарий
+          textarea.form-control name="comment[body]" id="comment_body"
+        p
+          input.btn type="submit" name="commit" value="Добавить комментарий" data-disable-with="Добавить комментарий"
+
+  - if @answer_attachments.length > 0
    .attachments
-      - for attach in @answer_attachments
-          id="attachment_#{attach.id}"
-          = link_to attach.file.identifier, attach.file.url
+    ul
+      - for a in @answer_attachments
+        li id="attachment_#{a.id}"
+          a href="#{a.file_url}" = a.file_name
+

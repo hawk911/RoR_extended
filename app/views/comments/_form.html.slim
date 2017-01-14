@@ -1,4 +1,4 @@
 = form_for [commentable, Comment.new], html: {id: "new-comment-#{commentable.class.name.downcase!}-#{commentable.id}"}, remote: true do |f|
   p= f.label :body
   p= f.text_area :body
-  p= f.submit 'Add comment'
+  p= f.submit I18n.t('comments.form.submit')
