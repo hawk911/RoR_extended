@@ -23,22 +23,23 @@ class Answer < ApplicationRecord
   private
 
   def actioncable_answer
+    #binding.pry
     return if errors.any?
 
-    attachments = []
+    answer_attachments = []
     attachments.each do |a|
       attach = {}
       attach[:id] = a.id
       attach[:file_url] = a.file.url
       attach[:file_name] = a.file.identifier
-      attachments << attach
-    end
+      answer_attachments << attach
+     end
 
     ActionCable.server.broadcast(
       "answers_question_#{question.id}",
       answer:             self,
-      answer_attachments: attachments,
-      answer_votes:       votes,
+      answer_attachments: answer_attachments,
+      answer_votes:       votes
     )
   end
 end

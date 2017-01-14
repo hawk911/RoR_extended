@@ -11,9 +11,8 @@ App.answers = App.cable.subscriptions.create channel: "AnswersChannel" ,
       return if gon.user_id is data.answer.user_id
       $(".errors").empty();
       console.log("AnswersChannel begin")
-      $('.answers').append JST['templates/answer'](answer: data['answer']
-      answer_attachments: data['answer_attachments']
-      answer_votes: data['answer_votes']
-      current_user_id: gon.current_user_id
-      question_user_id: data['question_user_id'])
+      $('.answers').append JST['templates/answer'](answer: data['answer'],
+      answer_attachments: data['answer_attachments'],
+      answer_votes: data['answer_votes'],
+      current_user_id: gon.current_user_id)
 
