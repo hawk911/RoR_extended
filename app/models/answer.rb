@@ -23,7 +23,6 @@ class Answer < ApplicationRecord
   private
 
   def actioncable_answer
-    #binding.pry
     return if errors.any?
 
     answer_attachments = []
@@ -39,7 +38,7 @@ class Answer < ApplicationRecord
       "answers_question_#{question.id}",
       answer:             self,
       answer_attachments: answer_attachments,
-      answer_votes:       votes
+      answer_votes:       self.total
     )
   end
 end
