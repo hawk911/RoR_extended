@@ -1,7 +1,4 @@
 class QuestionsChannel < ApplicationCable::Channel
-  def subscribed
-  end
-
   def unsubscribed
     # Rails.logger.info "You are disconnected"
   end
