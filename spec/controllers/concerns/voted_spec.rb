@@ -35,4 +35,8 @@ RSpec.shared_examples 'voted' do |parameter|
       end
     end
   end
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
 end

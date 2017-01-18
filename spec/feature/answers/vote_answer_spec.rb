@@ -17,7 +17,11 @@ feature 'Add vote to answer', "
       visit question_path(question)
     end
 
+<<<<<<< HEAD
     scenario 'like answer', js: true do
+=======
+    scenario 'like answer', js:true do
+>>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
       within '.answer_votes' do
         click_on I18n.t('votes.form.like')
 
@@ -32,7 +36,11 @@ feature 'Add vote to answer', "
       end
     end
 
+<<<<<<< HEAD
     scenario 'dislike answer', js: true do
+=======
+    scenario 'dislike answer', js:true do
+>>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
       within '.answer_votes' do
         click_on I18n.t('votes.form.dislike')
 
@@ -47,7 +55,11 @@ feature 'Add vote to answer', "
       end
     end
 
+<<<<<<< HEAD
     scenario 'change answer', js: true do
+=======
+    scenario 'change answer', js:true do
+>>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
       within '.answer_votes' do
         click_on I18n.t('votes.form.like')
         click_on I18n.t('votes.form.change')
@@ -63,7 +75,11 @@ feature 'Add vote to answer', "
       end
     end
 
+<<<<<<< HEAD
     scenario 'cancel answer', js: true do
+=======
+    scenario 'cancel answer', js:true do
+>>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
       within '.answer_votes' do
         click_on I18n.t('votes.form.like')
         click_on I18n.t('votes.form.cancel')
@@ -78,5 +94,9 @@ feature 'Add vote to answer', "
         within('.votable-total') { expect(page).to have_content('0') }
       end
     end
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
   end
 end

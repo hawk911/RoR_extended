@@ -6,12 +6,15 @@ p
   - if user_signed_in?
     .question_votes
       = render partial: 'votes/votes', locals: { votable: @question }
+<<<<<<< HEAD
     .question_comments
       div id="add-comment-to-question-#{@question.id}"
         = render partial: 'comments/form', locals: { commentable: @question }
   -if @question.comments.any?
     = render @question.comments
 
+=======
+>>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
   - if user_signed_in? && current_user.author_of?(@question)
       p
         = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
