@@ -2,7 +2,6 @@ class Answer < ApplicationRecord
   include Votable
   include Commentable
 
-
   has_many :attachments, as: :attachable, dependent: :destroy
   belongs_to :question
   belongs_to :user
