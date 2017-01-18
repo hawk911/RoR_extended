@@ -11,11 +11,7 @@ module Voted
     if current_user.can_vote?(@votable)
       respond_with(@votable.set_evaluate(current_user, 1), template: 'votes/vote.json.jbuilder')
     else
-<<<<<<< HEAD
       render json: '{"alert": "Вы не можете голосовать!"}', status: :unprocessable_entity
-=======
-      render json: '{"alert": "Вы не можете голосовать!"}' , status: :unprocessable_entity
->>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
     end
   end
 

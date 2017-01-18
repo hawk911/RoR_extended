@@ -2,15 +2,12 @@ require 'rails_helper'
 
 RSpec.configure do |config|
   Capybara.javascript_driver = :webkit
-<<<<<<< HEAD
+
   # ignore hidden elements
   Capybara.ignore_hidden_elements = true
 
   Capybara.server = :puma
-=======
-  #ignore hidden elements
-  Capybara.ignore_hidden_elements = true
->>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
+
   # feature_macros
   config.include FeatureMacros, type: :feature
 

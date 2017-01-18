@@ -10,12 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20_161_218_165_803) do
-=======
-ActiveRecord::Schema.define(version: 20161121042552) do
 
->>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
+ActiveRecord::Schema.define(version: 20_161_218_165_803) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,26 +46,6 @@ ActiveRecord::Schema.define(version: 20161121042552) do
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end
 
-<<<<<<< HEAD
-  create_table 'comments', force: :cascade do |t|
-    t.text     'body'
-    t.integer  'user_id'
-    t.string   'commentable_type'
-    t.integer  'commentable_id'
-    t.datetime 'created_at',       null: false
-    t.datetime 'updated_at',       null: false
-    t.index %w(commentable_type commentable_id), name: 'index_comments_on_commentable_type_and_commentable_id', using: :btree
-    t.index ['user_id'], name: 'index_comments_on_user_id', using: :btree
-  end
-
-  create_table 'questions', force: :cascade do |t|
-    t.string   'title'
-    t.text     'body'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.integer  'user_id'
-    t.index ['user_id'], name: 'index_questions_on_user_id', using: :btree
-=======
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
@@ -84,7 +61,6 @@ ActiveRecord::Schema.define(version: 20161121042552) do
     t.inet     "last_sign_in_ip"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
->>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
   end
 
   create_table "votes", force: :cascade do |t|
@@ -98,22 +74,6 @@ ActiveRecord::Schema.define(version: 20161121042552) do
     t.index ["votable_id", "votable_type"], name: "index_votes_on_votable_id_and_votable_type", using: :btree
   end
 
-<<<<<<< HEAD
-  create_table 'votes', force: :cascade do |t|
-    t.integer  'value'
-    t.integer  'votable_id'
-    t.string   'votable_type'
-    t.integer  'user_id'
-    t.datetime 'created_at',   null: false
-    t.datetime 'updated_at',   null: false
-    t.index ['user_id'], name: 'index_votes_on_user_id', using: :btree
-    t.index %w(votable_id votable_type), name: 'index_votes_on_votable_id_and_votable_type', using: :btree
-  end
-
   add_foreign_key 'answers', 'questions'
   add_foreign_key 'votes', 'users'
-=======
-  add_foreign_key "answers", "questions"
-  add_foreign_key "votes", "users"
->>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
 end

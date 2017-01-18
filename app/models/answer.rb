@@ -1,9 +1,7 @@
 class Answer < ApplicationRecord
   include Votable
-<<<<<<< HEAD
   include Commentable
-=======
->>>>>>> 1b85e5a1b3adf3e0c06fbe0cafa926989c608a61
+
 
   has_many :attachments, as: :attachable, dependent: :destroy
   belongs_to :question
