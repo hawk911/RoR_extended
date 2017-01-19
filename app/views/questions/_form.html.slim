@@ -7,6 +7,6 @@
     = f.label :body
     = f.text_area :body
     .attachments
-      = render 'attachments/form', f: f
+      = render 'attachments/form', f: f ,attachable: @question
   p
     = f.submit t('.submit')

@@ -1,5 +1,4 @@
-= f.fields_for :attachments do |a|
+= f.fields_for :attachments, attachable.attachments.build do |a|
   = render 'attachments/attachment_fields', f: a
   .add-file
     = link_to_add_association I18n.t('questions.form.add_file'), f, :attachments, partial: 'attachments/attachment_fields'
-

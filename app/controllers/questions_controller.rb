@@ -1,49 +1,57 @@
 class QuestionsController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :update, :destroy]
   before_action :check_owner, only: [:update, :destroy]
+  before_action :build_answer, only: :show
+  before_action :set_gon_current_user, only: :show
 
-  include Voted
+  respond_to :js, only: :update
 
   def index
-    @questions = Question.all
+    respond_with(@questions = Question.all)
   end
 
   def show
-    gon.current_user_id = current_user ? current_user.id : 0
-    @answer = @question.answers.build
-    @answer.attachments.build
+    #@answer.attachments.build
+    respond_with(@answer)
   end
 
   def new
-    @question = Question.new
-    @question.attachments.build
+    respond_with(@question = Question.new)
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.user = current_user
-    if @question.save
-      flash[:notice] = t('flash.success.new_question')
-      redirect_to @question
-    else
-      render :new
-    end
+    #@question = Question.new(question_params)
+    #@question.user = current_user
+    #flash[:notice] = t('flash.success.new_question') if @question.save
+    #respond_with @question
+    respond_with(@question = Question.create(question_params.merge(user: current_user)))
+
   end
 
   def update
     @question.update(question_params)
+    respond_with @question
   end
 
   def destroy
-    @question.destroy
-    redirect_to questions_path
+    respond_with @question.destroy
   end
 
   private
 
   def load_question
     @question = Question.find(params[:id])
+  end
+
+  def build_answer
+    @answer = @question.answers.build
+  end
+
+  def set_gon_current_user
+    gon.current_user_id = current_user ? current_user.id : 0
   end
 
   def question_params

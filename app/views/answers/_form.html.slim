@@ -5,6 +5,6 @@
   = f.text_area :body
   .attachments
     - if user_signed_in?
-      = render 'attachments/form', f: f
+      = render 'attachments/form', f: f, attachable: @answer
   p
   = f.submit t('.submit')
