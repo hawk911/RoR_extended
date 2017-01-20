@@ -11,6 +11,7 @@ html lang="ru"
   body
     - if current_user.present?
       = link_to t('.signOut'), destroy_user_session_path, method: :delete
+      = link_to t('.list'), questions_path if !current_page?(questions_path)
     - else
       = link_to t('.signIn'), new_user_session_path
       = link_to t('.signUp'), new_user_registration_path
