@@ -1,24 +1,26 @@
 class AnswersController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
   before_action :load_answer, only: [:destroy, :update, :set_best]
   before_action :check_owner, only: [:destroy, :update]
 
-  include Voted
+  respond_to :js
 
   def create
-    @answer = @question.answers.create(answer_params)
-    @answer.user = current_user
-    flash[:notice] = t('flash.success.new_answer') if @answer.save
+    #flash[:notice] = t('flash.success.new_answer') if @answer.save
+    respond_with(@answer = @question.answers.create(answer_params.merge(user: current_user)))
   end
 
   def update
     @answer.update(answer_params)
+    respond_with @answer
   end
 
   def destroy
-    @answer.destroy
-    redirect_to @answer.question, notice: t('flash.success.delete_answer')
+    respond_with @answer.destroy
+    #redirect_to @answer.question, notice: t('flash.success.delete_answer')
   end
 
   def set_best

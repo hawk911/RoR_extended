@@ -12,6 +12,11 @@ en:
         alert: '%{resource_name} could not be destroyed.'
     questions:
       create:
-        notice: 'Question added successfully'
+        notice: 'Question added successfully.'
       destroy:
-        notice: 'Question deleted successfully'
+        notice: 'Question deleted successfully.'
+    answers:
+      create:
+        notice: "Answer added successfully."
+      destroy:
+        notice: 'Answer deleted successfully.'

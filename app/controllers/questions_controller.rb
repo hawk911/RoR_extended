@@ -14,7 +14,6 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    #@answer.attachments.build
     respond_with(@answer)
   end
 
@@ -23,12 +22,8 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    #@question = Question.new(question_params)
-    #@question.user = current_user
     #flash[:notice] = t('flash.success.new_question') if @question.save
-    #respond_with @question
     respond_with(@question = Question.create(question_params.merge(user: current_user)))
-
   end
 
   def update
