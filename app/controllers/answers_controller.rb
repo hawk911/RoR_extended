@@ -19,8 +19,8 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    respond_with @answer.destroy
     #redirect_to @answer.question, notice: t('flash.success.delete_answer')
+    respond_with(@answer.destroy, :location => @answer.question)
   end
 
   def set_best
