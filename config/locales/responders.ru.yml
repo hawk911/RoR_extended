@@ -1,0 +1,22 @@
+en:
+  flash:
+    actions:
+      create:
+        notice: '%{resource_name} успешно.'
+        alert: '%{resource_name} не создан.'
+      update:
+        notice: '%{resource_name} успешно.'
+        alert: '%{resource_name} не обновлён.'
+      destroy:
+        notice: '%{resource_name} успешно удалён.'
+        alert: '%{resource_name} не удалён.'
+    questions:
+      create:
+        notice: 'Вы создали вопрос.'
+      destroy:
+        notice: 'Вы удалили вопрос.'
+    answers:
+      create:
+        notice: "Вы создали ответ."
+      destroy:
+        notice: 'Вы удалили ответ.'
