@@ -60,6 +60,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry'
   gem 'pry-byebug'
+  gem 'omniauth'
+  gem 'omniauth-facebook'
 end
 
 # shoulda-matchers, capybara, controller testing
