@@ -22,6 +22,8 @@ config/database.yml
 # Ignore rake
 .rake_tasks~
 
-
-# Ignote file
+# Ignore file
 /public/uploads/*
+
+# Ignore .env file
+.env
