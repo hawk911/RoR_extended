@@ -48,6 +48,9 @@ gem 'cocoon'
 gem 'gon'
 # Client-side templates
 gem 'skim'
+# Omniauth
+gem 'omniauth'
+gem 'omniauth-facebook'
 # test
 group :development, :test do
   gem 'rspec-rails'
@@ -60,8 +63,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry'
   gem 'pry-byebug'
-  gem 'omniauth'
-  gem 'omniauth-facebook'
+  gem 'dotenv-rails'
 end
 
 # shoulda-matchers, capybara, controller testing
