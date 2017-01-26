@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.configure do |config|
+  Capybara.server = :puma
   Capybara.javascript_driver = :webkit
-  # ignore hidden elements
   Capybara.ignore_hidden_elements = true
 
-  Capybara.server = :puma
+
+  OmniAuth.config.test_mode = true
   # feature_macros
   config.include FeatureMacros, type: :feature
 
