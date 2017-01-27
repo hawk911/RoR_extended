@@ -44,4 +44,6 @@ Rails.application.configure do
   # ActionCable
   config.action_cable.allowed_request_origins = ['http://localhost:3000', 'http://127.0.0.1:3000']
   config.action_cable.disable_request_forgery_protection = true
+  #mail
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3100 }
 end
