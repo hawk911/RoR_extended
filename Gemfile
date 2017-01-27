@@ -51,6 +51,7 @@ gem 'skim'
 # Omniauth
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 # test
 group :development, :test do
   gem 'rspec-rails'
@@ -64,6 +65,8 @@ group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
   gem 'dotenv-rails'
+  gem 'capybara-email'
+  gem 'letter_opener'
 end
 
 # shoulda-matchers, capybara, controller testing
