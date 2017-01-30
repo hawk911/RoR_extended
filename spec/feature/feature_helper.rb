@@ -9,6 +9,7 @@ RSpec.configure do |config|
   OmniAuth.config.test_mode = true
   # feature_macros
   config.include FeatureMacros, type: :feature
+  config.include OmniauthMacros
 
   config.use_transactional_fixtures = false
 
