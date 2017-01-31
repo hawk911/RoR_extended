@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks'}
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'omniauth_callbacks',
+    #registrations: 'devise/registrations',
+    confirmations: 'confirmations'
+  }
+
+  as :user do
+    get 'signup_email', to: 'users/registrations#edit_email', as: :edit_signup_email
+    post 'signup_email', to: 'users/registrations#update_email', as: :update_signup_email
+  end
 
   root 'questions#index'
 

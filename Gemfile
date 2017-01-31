@@ -60,6 +60,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'capybara-email'
   gem 'database_cleaner'
   gem 'pry-rails'
   gem 'pry'
