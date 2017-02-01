@@ -22,6 +22,8 @@ class User < ApplicationRecord
   end
 
   def self.find_for_oauth(auth)
+    return nil if (auth.blank? || auth.provider.blank? || auth.uid.blank?)
+
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return authorization.user if authorization
 
@@ -33,7 +35,7 @@ class User < ApplicationRecord
       confirmation_required = true
     end
 
-    if !user
+    unless user
       password = Devise.friendly_token[0,20]
       user = User.create!(email: email, password: password, password_confirmation: password)
       user.update!(confirmed_at: nil) if confirmation_required
@@ -45,7 +47,7 @@ class User < ApplicationRecord
   end
 
   def create_authorization(auth)
-    self.authorizations.create(provider: auth.provider, uid: auth.uid)
+    self.authorizations.create!(provider: auth.provider, uid: auth.uid)
   end
 
   def last_authorization_twitter?
