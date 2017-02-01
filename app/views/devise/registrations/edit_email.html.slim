@@ -1,6 +1,6 @@
 h2 Please, enter your e-mail to complite registration process:
 
-= render 'application/error_messages', target: @user
+= render 'common/errors', resourse: @user
 = form_tag(update_signup_email_path) do
   .row
     .col-xs-8.col-sm-6

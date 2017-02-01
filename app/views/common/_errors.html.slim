@@ -1,5 +1,5 @@
 div class="#{resourse.class.name.downcase}_errors"
-  - if resourse.errors.any?
+  - if resourse && resourse.errors.any?
     - resourse.errors.full_messages.each do |error|
       p
       = error
