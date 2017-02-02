@@ -26,6 +26,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         session['devise.new_user_id'] = @user.id
         redirect_to edit_signup_email_path
       end
+    else
+      set_flash_message(:notice, :failure,
+                        kind: (auth == nil ? 'Oauth provider' : auth.provider.capitalize),
+                        reason: I18n.t('errors.messages.oauth')) if is_navigational_format?
+      redirect_to new_user_session_path
     end
   end
 end

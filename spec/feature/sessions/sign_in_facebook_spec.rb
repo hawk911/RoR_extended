@@ -8,12 +8,19 @@ feature 'Signing in using facebook account',
   scenario "Facebook user tries to sign in" do
     mock_auth_facebook
     click_link 'Sign in with Facebook'
-    expect(page).to have_content('Successfully authenticated from Facebook account')
+
+    within '.notice' do
+      expect(page).to have_content I18n.t('devise.omniauth_callbacks.success',kind: 'Facebook')
+    end
   end
 
   scenario "Facebook user tries to sign in with invalid credentials" do
     mock_auth_facebook_invalid
     click_link 'Sign in with Facebook'
-    expect(page).to have_content('Could not authenticate you from Facebook because "Credentials are invalid"')
+
+    within '.notice' do
+      expect(page).to have_content I18n.t('devise.omniauth_callbacks.failure', kind:'Oauth provider',
+                                          reason: I18n.t('errors.messages.oauth') )
+    end
   end
 end

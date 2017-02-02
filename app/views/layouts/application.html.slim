@@ -9,6 +9,9 @@ html lang="ru"
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
   body
+    .notice
+      = flash[:notice] if flash[:notice]
+      = flash[:alert] if flash[:alert]
     - if current_user.present?
       = link_to t('.signOut'), destroy_user_session_path, method: :delete
       = link_to t('.list'), questions_path if !current_page?(questions_path)
@@ -16,7 +19,5 @@ html lang="ru"
       = link_to t('.signIn'), new_user_session_path
       = link_to t('.signUp'), new_user_registration_path
 
-    = flash[:notice] if flash[:notice]
-    = flash[:alert] if flash[:alert]
 
 = yield
