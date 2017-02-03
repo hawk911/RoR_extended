@@ -52,6 +52,8 @@ gem 'skim'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+#cancancan
+gem 'cancancan'
 # test
 group :development, :test do
   gem 'rspec-rails'
