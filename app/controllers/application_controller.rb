@@ -1,12 +1,13 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
-  self.responder = ApplicationResponder
-  respond_to :html
+  before_action :set_gon_user, unless: :devise_controller?
+  check_authorization unless: :devise_controller?
 
   protect_from_forgery with: :exception
 
-  before_action :set_gon_user, unless: :devise_controller?
+  self.responder = ApplicationResponder
+  respond_to :html
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -17,8 +18,6 @@ class ApplicationController < ActionController::Base
       format.js   { head :forbidden }
     end
   end
-
-  check_authorization unless: :devise_controller?
 
   private
 
