@@ -8,6 +8,8 @@ class AnswersController < ApplicationController
 
   respond_to :js
 
+  authorize_resource
+
   def create
     #flash[:notice] = t('flash.success.new_answer') if @answer.save
     respond_with(@answer = @question.answers.create(answer_params.merge(user: current_user)))

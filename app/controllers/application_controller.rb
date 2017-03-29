@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
 
   self.responder = ApplicationResponder
   respond_to :html
-
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.html { redirect_to root_url, notice: exception.message }
