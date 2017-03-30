@@ -12,7 +12,7 @@ p
   -if @question.comments.any?
     = render @question.comments
 
-  - if user_signed_in? && current_user.author_of?(@question)
+  - if can?(:update, @question)
       p
         = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
           = f.label :body, I18n.t('activerecord.models.question')

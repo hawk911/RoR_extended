@@ -28,13 +28,18 @@ class Ability
     can :update, [Question, Answer, Comment] , user: user
     can :destroy, [Question, Answer, Comment], user: user
 
-    can :set_best, Answer, question: { user: user }
+    #can :set_best, Answer, question: { user: user }
+    can :best, Answer do |answer|
+      user.author_of?(answer.question)
+    end
 
-    can :vote_up, [Question, Answer]
-    can :vote_down, [Question, Answer]
-    cannot :vote_up, [Question, Answer], user: user
-    cannot :vote_down, [Question, Answer], user: user
+    can [:like, :dislike], [Question, Answer] do |votable|
+      user.can_vote?(votable)
+    end
 
+    can [:change_vote, :cancel_vote], [Question, Answer] do |votable|
+      !user.author_of?(votable) && user.voted?(votable)
+    end
     can :destroy, [Attachment], attachable: { user: user }
   end
 end

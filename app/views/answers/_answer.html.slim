@@ -13,14 +13,14 @@
         - answer.attachments.each do |attach|
            li id="attachment_#{attach.id}"
             = link_to attach.file.identifier, attach.file.url
-            = link_to I18n.t('attachment.form.delete_attach'), attach, method: 'delete', remote: true, class: 'litle_link' if user_signed_in? && current_user.author_of?(answer)
+            = link_to I18n.t('attachment.form.delete_attach'), attach, method: 'delete', remote: true, class: 'litle_link' if user_signed_in? && can?(:destroy,answer)
     .links
       - if user_signed_in?
         .answer_votes
           = render partial: 'votes/votes', locals: { votable: answer }
-        - if current_user.author_of?(answer.question)
+        - if can?(:set_best, answer.question)
           = link_to (answer.best? ? 'Revert' : 'Best answer'),set_best_answer_path(answer),class: 'select-best-answer', remote:true, method: :patch
-        - if current_user.author_of?(answer)
+        - if can?(:update, answer)
           = link_to I18n.t('answers.form.edit'),'', class: 'edit-answer-link', data: { answer_id: answer.id }
           p
             = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
