@@ -28,8 +28,7 @@ class Ability
     can :update, [Question, Answer, Comment] , user: user
     can :destroy, [Question, Answer, Comment], user: user
 
-    #can :set_best, Answer, question: { user: user }
-    can :best, Answer do |answer|
+    can :set_best, Answer do |answer|
       user.author_of?(answer.question)
     end
 
