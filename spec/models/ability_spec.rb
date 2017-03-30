@@ -55,18 +55,24 @@ describe 'Ability' do
     it { should be_able_to :set_best, create(:answer, question: his_question) }
     it { should_not be_able_to :set_best, create(:answer, question: other_question) }
 
-     # Votes
-    it { should be_able_to :vote_up, other_question }
-    it { should_not be_able_to :vote_up, his_question }
+    # Votes
+    it { should be_able_to :like, other_question }
+    it { should_not be_able_to :like, his_question }
 
-    it { should be_able_to :vote_down, other_question }
-    it { should_not be_able_to :vote_down, his_question }
+    it { should be_able_to :dislike, other_question }
+    it { should_not be_able_to :dislike, his_question }
+    context 'Vote#change_vote' do
+      before { other_answer.set_evaluate(user, 1) }
+      it { should be_able_to :change_vote, other_answer }
+      it { should_not be_able_to :change_vote, his_answer }
+    end
 
-    it { should be_able_to :vote_up, create(:answer) }
-    it { should_not be_able_to :vote_up, his_answer }
+    context 'Vote#cancel_vote' do
+      before { other_answer.set_evaluate(user, 1) }
+      it { should be_able_to :cancel_vote, other_answer }
+      it { should_not be_able_to :cancel_vote, his_answer }
+    end
 
-    it { should be_able_to :vote_down, create(:answer) }
-    it { should_not be_able_to :vote_down, his_answer }
 
     # Attachments
     it { should be_able_to :destroy, his_question.attachments.build }
