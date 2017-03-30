@@ -24,6 +24,10 @@ ru:
         attributes:
           user: 'Пользователь'
           body: 'Вопрос'
+      question:
+        attributes:
+          body:
+            too_short: 'должен быть больше 5 знаков.'
     messages:
       blank: "не может быть пустым"
       invalid: "не правильный"
