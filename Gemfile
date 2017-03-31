@@ -54,6 +54,8 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 #cancancan
 gem 'cancancan'
+#doorkeeper
+gem 'doorkeeper'
 # test
 group :development, :test do
   gem 'rspec-rails'
