@@ -79,6 +79,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'rails-controller-testing'
+  gem 'json_spec'
 end
 
 group :development do

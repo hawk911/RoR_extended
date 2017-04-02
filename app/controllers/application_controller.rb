@@ -3,7 +3,6 @@ require "application_responder"
 class ApplicationController < ActionController::Base
   before_action :set_gon_user, unless: :devise_controller?
   skip_authorization_check :root_url
-  check_authorization unless: :devise_controller?
 
   protect_from_forgery with: :exception
 
@@ -18,6 +17,8 @@ class ApplicationController < ActionController::Base
       format.js   { head :forbidden }
     end
   end
+
+  check_authorization unless: :devise_controller?
 
   private
 
