@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         get :index, on: :collection
       end
       resources :questions do
+        resources :answers, shallow: true
         get :list, on: :collection
       end
     end

@@ -6,7 +6,7 @@ shared_examples_for "API Attachable" do |attachable|
 
     it "Attachments object contains url" do
       #binding.pry
-      expect(response.body).to be_json_eql(attachments.last.file.url.to_json).at_path("#{attachable}/attachments/0/url")
+      expect(response.body).to be_json_eql(attachments.last.file.url.to_json).at_path("#{attachable}/attachments/0/file/url")
     end
   end
 end

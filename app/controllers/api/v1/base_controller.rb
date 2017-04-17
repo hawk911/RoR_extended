@@ -1,9 +1,9 @@
 class Api::V1::BaseController < ApplicationController
+  protect_from_forgery with: :null_session
   before_action :doorkeeper_authorize!
 
   respond_to :json
 
-  protect_from_forgery with: :null_session
   protected
 
   def current_resource_owner
