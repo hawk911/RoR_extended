@@ -56,6 +56,11 @@ gem 'omniauth-twitter'
 gem 'cancancan'
 #doorkeeper
 gem 'doorkeeper'
+#serializers
+gem 'active_model_serializers', '~> 0.10.0'
+#the faster json
+gem 'oj'
+gem 'oj_mimic_json'
 # test
 group :development, :test do
   gem 'rspec-rails'

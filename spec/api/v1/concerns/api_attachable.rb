@@ -1,0 +1,12 @@
+shared_examples_for "API Attachable" do |attachable|
+  context 'attachments' do
+    it "included in #{attachable} object" do
+      expect(response.body).to have_json_size(2).at_path("#{attachable}/attachments")
+    end
+
+    it "Attachments object contains url" do
+      #binding.pry
+      expect(response.body).to be_json_eql(attachments.last.file.url.to_json).at_path("#{attachable}/attachments/0/file/url")
+    end
+  end
+end
