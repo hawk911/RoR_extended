@@ -40,5 +40,7 @@ class Ability
       !user.author_of?(votable) && user.voted?(votable)
     end
     can :destroy, [Attachment], attachable: { user: user }
+    can [:read, :me], User
+    can :list, Question
   end
 end
