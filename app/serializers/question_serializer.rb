@@ -1,4 +1,4 @@
 class QuestionSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body, :created_at, :updated_at
+  attributes :id, :title, :body, :user_id, :created_at, :updated_at
   has_many :answers
 end
