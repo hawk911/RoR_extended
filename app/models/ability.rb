@@ -41,6 +41,6 @@ class Ability
     end
     can :destroy, [Attachment], attachable: { user: user }
     can [:read, :me], User
-    can :list, Question
+
   end
 end
