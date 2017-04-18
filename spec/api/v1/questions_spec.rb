@@ -1,7 +1,5 @@
 require 'rails_helper'
-require Rails.root.join('spec/api/v1/concerns/api_authorization')
-require Rails.root.join('spec/api/v1/concerns/api_commentable')
-require Rails.root.join('spec/api/v1/concerns/api_attachable')
+require_relative 'api_helper'
 
 describe 'Questions API' do
   describe 'GET #index' do
@@ -16,7 +14,7 @@ describe 'Questions API' do
       let!(:answer) { create(:answer, question: question) }
 
       before do
-        get url, params: { access_token: access_token.token, format: :json }
+        do_request(url, { access_token: access_token.token } )
       end
 
       it 'returns 200 status' do
@@ -59,7 +57,7 @@ describe 'Questions API' do
     context 'authorized' do
       let(:access_token) { create(:access_token) }
       before do
-        get url, params: { access_token: access_token.token, format: :json }
+        do_request(url, { access_token: access_token.token })
       end
 
       it 'returns 200 status code' do
@@ -83,12 +81,13 @@ describe 'Questions API' do
 
   describe 'POST #create' do
     let(:url) { "/api/v1/questions/" }
+    let(:http_method) { :post }
 
     it_behaves_like "API Authenticable"
 
     context 'authorized and post valid data' do
       let(:access_token) { create(:access_token) }
-      let(:params) do
+      let(:options) do
         {
           question:     { title: 'New question title', body: 'New question body' },
           access_token: access_token.token,
@@ -97,7 +96,7 @@ describe 'Questions API' do
       end
 
       before do
-        post url, params: params
+        do_request(url, http_method, options)
       end
 
       it 'returns 201 status code' do
@@ -107,7 +106,7 @@ describe 'Questions API' do
 
     context 'authorized and post invalid data' do
       let(:access_token) { create(:access_token) }
-      let(:params) do
+      let(:options) do
         {
           question:     { title: 'Question title', body: nil },
           access_token: access_token.token,
@@ -116,7 +115,7 @@ describe 'Questions API' do
       end
 
       before do
-        post url, params: params
+        do_request(url, http_method, options)
       end
 
       it 'returns 422 status code' do
