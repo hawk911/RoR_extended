@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.shared_examples 'voted' do |parameter|
+shared_examples 'voted' do |parameter|
   sign_in_user
 
   let(:user) { create :user }
