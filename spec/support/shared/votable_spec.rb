@@ -1,6 +1,5 @@
-require 'rails_helper'
 
-RSpec.shared_examples 'votable' do
+shared_examples 'votable' do
   let(:user) { create :user }
   let(:votable) { create(described_class.to_s.underscore.to_sym) }
 

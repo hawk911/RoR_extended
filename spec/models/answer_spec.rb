@@ -1,5 +1,4 @@
 require 'rails_helper'
-require Rails.root.join('spec/models/concerns/votable_spec')
 
 RSpec.describe Answer, type: :model do
   context 'validate' do
