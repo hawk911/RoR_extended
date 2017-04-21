@@ -61,6 +61,8 @@ gem 'active_model_serializers', '~> 0.10.0'
 #the faster json
 gem 'oj'
 gem 'oj_mimic_json'
+#sidekiq
+gem 'sidekiq'
 # test
 group :development, :test do
   gem 'rspec-rails'
