@@ -63,6 +63,8 @@ gem 'oj'
 gem 'oj_mimic_json'
 #sidekiq
 gem 'sidekiq'
+#sinatra for sidekiq
+gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', require: nil
 # test
 group :development, :test do
   gem 'rspec-rails'
