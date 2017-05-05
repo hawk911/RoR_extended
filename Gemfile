@@ -65,6 +65,8 @@ gem 'oj_mimic_json'
 gem 'sidekiq'
 #sinatra for sidekiq
 gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', require: nil
+# whenever on cron
+gem 'whenever'
 # test
 group :development, :test do
   gem 'rspec-rails'

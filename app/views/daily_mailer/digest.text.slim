@@ -1,3 +1,7 @@
-' Daily#digest
+' Daily digest
 = "\r\n" * 2
-' #{@greeting + ", find me in app/views/daily_mailer/digest.text.slim"}
+
+- if @questions.any?
+  - @questions.each do |question|
+    = question.title + ":\r\n"
+    = question_url(question) + "\r\n" * 2
