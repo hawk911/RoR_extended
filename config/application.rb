@@ -18,7 +18,7 @@ module RoRExtended
     # -- all .rb files in that directory are automatically loaded.
 
     # i18n default ru
-    config.i18n.default_locale = :en
+    config.i18n.default_locale = :ru
 
     # Settings generate
     config.generators do |g|
