@@ -11,7 +11,12 @@ p
         = render partial: 'comments/form', locals: { commentable: @question }
   -if @question.comments.any?
     = render @question.comments
-
+    span.subscribe
+      - if current_user && current_user.subscribed_to?(@question)
+        = link_to 'unsubscribe', Subscription.find_by(user: current_user, question: @question), method: :delete, remote: true
+      - else
+        - if can? :create, Subscription
+          = link_to 'subscribe', question_subscriptions_path(@question), method: :post, remote: true
   - if can?(:update, @question)
       p
         = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|

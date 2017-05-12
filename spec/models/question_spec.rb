@@ -14,6 +14,11 @@ RSpec.describe Question, type: :model do
     it { should accept_nested_attributes_for :attachments }
   end
 
+  context 'subscription' do
+    it { should have_many(:subscriptions).dependent(:destroy) }
+    it { should have_many(:subscribers).through(:subscriptions).source(:user) }
+  end
+
   context 'have index' do
     it { should have_db_index :user_id }
   end

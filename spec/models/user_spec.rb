@@ -11,6 +11,11 @@ RSpec.describe User, type: :model do
     it { should have_many(:answers) }
   end
 
+  context 'subscription' do
+    it { should have_many(:subscriptions).dependent(:destroy) }
+    it { should have_many(:subscribed_questions).through(:subscriptions).source(:question) }
+  end
+
   describe '.find_for_oauth' do
     let!(:user) { create(:user) }
     let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '1234567890') }
@@ -70,12 +75,19 @@ RSpec.describe User, type: :model do
       end
     end
   end
-  describe '.send_daily_digest' do
-    let(:users) { create_list(:user, 2) }
 
-    it 'should send daily digest to all users' do
-      users.each { |user| expect(DailyMailer).to receive(:digest).with(user).and_call_original }
-      User.send_daily_digest
+  describe '#subscribed_to?' do
+    let(:subscribed_user) { create(:user) }
+    let(:not_subscribed_user) { create(:user) }
+    let(:question) { create(:question) }
+    let!(:subscription) { create(:subscription, user: subscribed_user, question: question) }
+
+    context 'when user is subscribed' do
+      it { expect(subscribed_user).to be_subscribed_to(question) }
+    end
+
+    context 'when user is not subscribed' do
+      it { expect(not_subscribed_user).to_not be_subscribed_to(question) }
     end
   end
 end

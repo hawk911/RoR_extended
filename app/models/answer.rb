@@ -8,6 +8,7 @@ class Answer < ApplicationRecord
 
   validates :body, :question_id, :user_id, presence: true
   after_create :actioncable_answer
+  after_create :notify_subscribers
   accepts_nested_attributes_for :attachments, reject_if: proc { |a| a[:file].blank? }, allow_destroy: true
 
   default_scope { order(best: :desc, created_at: :asc) }
@@ -32,7 +33,7 @@ class Answer < ApplicationRecord
       attach[:file_url] = a.file.url
       attach[:file_name] = a.file.identifier
       answer_attachments << attach
-     end
+    end
 
     ActionCable.server.broadcast(
       "answers_question_#{question.id}",
@@ -40,5 +41,9 @@ class Answer < ApplicationRecord
       answer_attachments: answer_attachments,
       answer_votes:       self.total
     )
+  end
+
+  def notify_subscribers
+    NewAnswerNotificationJob.perform_later self
   end
 end
