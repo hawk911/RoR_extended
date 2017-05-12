@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     resources :answers, only: [:new, :create, :update, :destroy], concerns: [:votable, :commentable], shallow: true do
       patch :set_best, on: :member
     end
+    resources :subscriptions, shallow: true, only: [:create, :destroy]
   end
 
   resources :attachments, only: [:destroy]

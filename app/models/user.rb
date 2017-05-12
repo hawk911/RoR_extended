@@ -8,11 +8,17 @@ class User < ApplicationRecord
   has_many :questions
   has_many :answers
   has_many :authorizations, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
+  has_many :subscribed_questions, through: :subscriptions, source: :question
 
   scope :everybody_except_me, ->(me) { where.not(id: me) }
 
   def author_of?(object)
     object.user_id == id
+  end
+
+  def subscribed_to?(question)
+    Subscription.exists?(user_id: id, question_id: question.id)
   end
 
   def voted?(object)
@@ -60,9 +66,9 @@ class User < ApplicationRecord
     "#{SecureRandom.hex(15)}@example.com"
   end
 
-  def self.send_daily_digest
-    find_each.each do |user|
-      DailyMailer.digest(user).deliver_later
-    end
-  end
+  #def self.send_daily_digest
+  #  find_each.each do |user|
+  #    DailyMailer.digest(user).deliver_later
+  #  end
+  #end
 end
