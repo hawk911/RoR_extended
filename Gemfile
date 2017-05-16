@@ -67,6 +67,10 @@ gem 'sidekiq'
 gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', require: nil
 # whenever on cron
 gem 'whenever'
+#mysql for sphinx
+gem 'mysql2',          '~> 0.4.5'
+#sphinx
+gem 'thinking-sphinx', '~> 3.3.0'
 # test
 group :development, :test do
   gem 'rspec-rails'
