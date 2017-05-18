@@ -18,6 +18,9 @@
 
 # Ignore database
 config/database.yml
+config/*.sphinx.conf
+db/sphinx
+
 
 # Ignore rake
 .rake_tasks~
