@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :search, only: :show
+
   root 'questions#index'
 
   concern :votable do

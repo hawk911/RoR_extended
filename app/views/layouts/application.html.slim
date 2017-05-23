@@ -13,6 +13,7 @@ html lang="ru"
       = flash[:notice] if flash[:notice]
       = flash[:alert] if flash[:alert]
     - if current_user.present?
+      = link_to t('.search'), search_path
       = link_to t('.signOut'), destroy_user_session_path, method: :delete
       = link_to t('.list'), questions_path if !current_page?(questions_path)
     - else
