@@ -18,7 +18,7 @@
 
 # Ignore database
 config/database.yml
-#config/*.sphinx.conf
+config/*.sphinx.conf
 db/sphinx
 
 
