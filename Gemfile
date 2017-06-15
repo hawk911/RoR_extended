@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', git: 'https://github.com/cowboyd/therubyracer.git', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -71,6 +71,8 @@ gem 'whenever'
 gem 'mysql2',          '~> 0.4.5'
 #sphinx
 gem 'thinking-sphinx', '~> 3.3.0'
+#dotenv
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
 # test
 group :development, :test do
   gem 'rspec-rails'
@@ -84,7 +86,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry'
   gem 'pry-byebug'
-  gem 'dotenv-rails'
   gem 'capybara-email'
   gem 'letter_opener'
 end
