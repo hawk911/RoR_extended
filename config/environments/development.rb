@@ -55,7 +55,9 @@ Rails.application.configure do
   # devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # ActionCable
-  config.action_cable.allowed_request_origins = [ 'http://207.154.227.158', /http:\/\/207.154.227.158.*/ ]
+  config.action_cable.allowed_request_origins = ['http://localhost:3000', 'http://127.0.0.1:3000']
+  config.action_cable.disable_request_forgery_protection = false
+
   #letter_opener
   config.action_mailer.delivery_method = :letter_opener
 end
