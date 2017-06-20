@@ -37,8 +37,8 @@ Rails.application.routes.draw do
 
   concern :votable do
     member do
-      post :like
-      post :dislike
+      patch :like
+      patch :dislike
       patch :change_vote
       delete :cancel_vote
     end
