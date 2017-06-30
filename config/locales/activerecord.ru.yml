@@ -18,16 +18,20 @@ ru:
         password_confirmation: 'Подтвердите пароль'
       comment:
         body: 'Комментарий'
-  errors:
-    models:
-      answer:
-        attributes:
-          user: 'Пользователь'
-          body: 'Вопрос'
-      question:
-        attributes:
-          body:
-            too_short: 'должен быть больше 5 знаков.'
+    errors:
+      models:
+        answer:
+          attributes:
+            user: 'Пользователь'
+            body: 'Вопрос'
+        question:
+          attributes:
+            title:
+              too_short: 'должно быть больше 5 знаков.'
+              blank: 'не может быть пустым'
+            body:
+              too_short: 'должен быть больше 5 знаков.'
+              blank: 'не может быть пустым'
     messages:
       blank: "не может быть пустым"
       invalid: "не правильный"
