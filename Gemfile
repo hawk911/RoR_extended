@@ -73,6 +73,8 @@ gem 'mysql2',          '~> 0.4.5'
 gem 'thinking-sphinx', '~> 3.3.0'
 #dotenv
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
+#unicorn
+gem 'unicorn'
 # test
 group :development, :test do
   gem 'rspec-rails'
@@ -111,6 +113,7 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
