@@ -5,7 +5,7 @@ pid               "#{app_path}/current/tmp/pids/unicorn.pid"
 
 # listen
 # listen "/tmp/unicorn.RoR_extended.sock", backlog: 64
-listen "/tmp/unicorn.RoR_extended.sock", backlog: 64
+listen "/var/sockets/unicorn.RoR_extended.sock", backlog: 64
 
 # logging
 stderr_path "log/unicorn.stderr.log"
