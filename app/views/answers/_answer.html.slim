@@ -1,31 +1,32 @@
 -if answer.persisted?
-  div id="answer_#{answer.id}"
-    p = answer.body
-    - if user_signed_in?
-      .answer_comments
-        div id="add-comment-to-answer-#{answer.id}"
-          = render partial: 'comments/form', locals: { commentable: answer }
-    -if @answer.comments.any?
-      = render @answer.comments
-    - if answer.attachments.exists?
-      .attachments
-       ul
-        - answer.attachments.each do |attach|
-           li id="attachment_#{attach.id}"
-            = link_to attach.file.identifier, attach.file.url
-            = link_to I18n.t('attachment.form.delete_attach'), attach, method: 'delete', remote: true, class: 'litle_link' if user_signed_in? && can?(:destroy,answer)
-    .links
+  - cache answer do
+    div id="answer_#{answer.id}"
+      p = answer.body
       - if user_signed_in?
-        .answer_votes
-          = render partial: 'votes/votes', locals: { votable: answer }
-        - if can?(:set_best, answer.question)
-          = link_to (answer.best? ? 'Revert' : 'Best answer'),set_best_answer_path(answer),class: 'select-best-answer', remote:true, method: :patch
-        - if can?(:update, answer)
-          = link_to I18n.t('answers.form.edit'),'', class: 'edit-answer-link', data: { answer_id: answer.id }
-          p
-            = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
-              = f.label :body, I18n.t('activerecord.models.answer')
-              = f.text_area :body
-              = f.submit I18n.t('answers.form.edit_save')
-          = link_to I18n.t('activerecord.attributes.answer.delete'), answer, method: :delete, remote:true
-
+        .answer_comments
+          div id="add-comment-to-answer-#{answer.id}"
+            = render partial: 'comments/form', locals: { commentable: answer }
+      -if @answer.comments.any?
+        - cache @answer.comments do
+          = render @answer.comments
+      - if answer.attachments.exists?
+        .attachments
+         ul
+          - answer.attachments.each do |attach|
+             li id="attachment_#{attach.id}"
+              = link_to attach.file.identifier, attach.file.url
+              = link_to I18n.t('attachment.form.delete_attach'), attach, method: 'delete', remote: true, class: 'litle_link' if user_signed_in? && can?(:destroy,answer)
+      .links
+        - if user_signed_in?
+          .answer_votes
+            = render partial: 'votes/votes', locals: { votable: answer }
+          - if can?(:set_best, answer.question)
+            = link_to (answer.best? ? 'Revert' : 'Best answer'),set_best_answer_path(answer),class: 'select-best-answer', remote:true, method: :patch
+          - if can?(:update, answer)
+            = link_to I18n.t('answers.form.edit'),'', class: 'edit-answer-link', data: { answer_id: answer.id }
+            p
+              = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
+                = f.label :body, I18n.t('activerecord.models.answer')
+                = f.text_area :body
+                = f.submit I18n.t('answers.form.edit_save')
+            = link_to I18n.t('activerecord.attributes.answer.delete'), answer, method: :delete, remote:true

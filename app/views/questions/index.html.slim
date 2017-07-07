@@ -1,7 +1,9 @@
 .questions
-  - @questions.each do |question|
-    div id="question_#{question.id}"
-      = link_to question.title, question
+  - if @questions.present?
+    - cache collection_cache_key_for :question do
+      - @questions.each do |question|
+        div id="question_#{question.id}"
+          = link_to question.title, question
 
 p = link_to t('.ask'), new_question_path
 
