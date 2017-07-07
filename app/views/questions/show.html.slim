@@ -1,8 +1,9 @@
 .errors
 p
 .question id="question_#{@question.id}"
-  .question_attachment
-    = render 'question_with_attachments'
+  - cache @question do
+    .question_attachment
+      = render 'question_with_attachments'
   - if user_signed_in?
     .question_votes
       = render partial: 'votes/votes', locals: { votable: @question }
@@ -10,7 +11,8 @@ p
       div id="add-comment-to-question-#{@question.id}"
         = render partial: 'comments/form', locals: { commentable: @question }
   -if @question.comments.any?
-    = render @question.comments
+    - cache @question.comments do
+      = render @question.comments
     span.subscribe
       - if current_user && current_user.subscribed_to?(@question)
         = link_to 'unsubscribe', Subscription.find_by(user: current_user, question: @question), method: :delete, remote: true

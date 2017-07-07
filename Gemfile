@@ -75,6 +75,8 @@ gem 'thinking-sphinx', '~> 3.3.0'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 #unicorn
 gem 'unicorn'
+#redis for cach
+gem 'redis-rails'
 # test
 group :development, :test do
   gem 'rspec-rails'
